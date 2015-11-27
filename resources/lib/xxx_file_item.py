@@ -23,7 +23,6 @@ print thumbnails.get_cached_plugin_thumbs( "plugin type", "plugin name" )# tuple
 """
 
 import os
-import sys
 
 import xbmc
 
@@ -31,11 +30,16 @@ THUMBS_CACHE_PATH = os.path.join(xbmc.translatePath("special://profile/"), "Thum
                                                                                                                  "//")
 
 
+# noinspection PyUnusedLocal
 class Thumbnails:
-    def get_cached_thumb(self, path1, path2, SPLIT=False):
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def get_cached_thumb(path1, path2, split=False):
         # get the locally cached thumb
         filename = xbmc.getCacheThumbName(path1)
-        if SPLIT:
+        if split:
             thumb = os.path.join(filename[0], filename)
         else:
             thumb = filename
@@ -44,7 +48,8 @@ class Thumbnails:
     def get_cached_artist_thumb(self, strLabel):
         return self.get_cached_thumb("artist" + strLabel, os.path.join(THUMBS_CACHE_PATH), True)
 
-    def get_cached_profile_thumb(self):
+    @staticmethod
+    def get_cached_profile_thumb():
         return xbmc.translatePath(xbmc.getInfoImage("System.ProfileThumb"))
 
     def get_cached_season_thumb(self, seasonPath):
@@ -75,7 +80,7 @@ class Thumbnails:
         return self.get_cached_thumb(strPath, os.path.join(THUMBS_CACHE_PATH, "Programs"))
 
     def get_cached_script_thumb(self, strLabel):
-        return self.get_cached_program_thumb("special://home/scripts/%s/default.py" % (strLabel))
+        return self.get_cached_program_thumb("special://home/scripts/%s/default.py" % strLabel)
 
     def get_cached_plugin_thumbs(self, strType, strLabel):
         if strType.lower() in ["music", "pictures", "programs", "video", "weather"]:
@@ -84,5 +89,5 @@ class Thumbnails:
         return "", ""
 
 
-if (__name__ == "__main__"):
+if __name__ == "__main__":
     thumbnails = Thumbnails()

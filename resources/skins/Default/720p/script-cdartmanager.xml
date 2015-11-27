@@ -609,7 +609,7 @@ id      | description
                     <aligny>center</aligny>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32111]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32111]</label>
                 </control>
                 <control type="panel" id="404">
                     <description>Album List</description>
@@ -1161,11 +1161,14 @@ id      | description
                     <posx>-5</posx>
                     <posy>0</posy>
                     <width>400</width>
+                    <!--
                     <height>200</height>
+                    -->
+                    <height>160</height>
                     <texture border="40">default-black.png</texture>
                     <visible>ControlGroup(9011).HasFocus</visible>
                 </control>
-                <control type="label" id="300">
+                <control type="label" id="301">
                     <posx>5</posx>
                     <posy>0</posy>
                     <width>390</width>
@@ -1190,7 +1193,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32074]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32074]</label>
                     <align>center</align>
                     <aligny>center</aligny>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
@@ -1198,7 +1201,10 @@ id      | description
                     <pulseonselect>false</pulseonselect>
                     <onleft>140</onleft>
                     <onright>142</onright>
+                    <!--
                     <onup>144</onup>
+                    -->
+                    <onup>143</onup>
                     <ondown>143</ondown>
                 </control>
                 <control type="button" id="143"> <!-- Restore From Backup Folder -->
@@ -1214,16 +1220,20 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32075]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32075]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
                     <onleft>140</onleft>
                     <onright>143</onright>
                     <onup>142</onup>
-                    <ondown>144</ondown>                       
+                    <!--
+                    <ondown>144</ondown>
+                    -->
+                    <ondown>142</ondown>
                 </control>
-                <control type="button" id="144"> <!-- Copy To Unique Folder For Upload -->
+                <!-- control removed, defunct
+                <control type="button" id="144"> <!-!- Copy To Unique Folder For Upload -!->
                     <description>Copy To Unique Folder For Upload</description>
                     <posx>10</posx>
                     <posy>140</posy>
@@ -1236,7 +1246,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32076]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32076]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1245,6 +1255,7 @@ id      | description
                     <onup>143</onup>
                     <ondown>142</ondown>
                 </control>
+                -->
             </control>
             
             <control type="group" id="9032">  <!--  MBID pop up menu -->
@@ -1286,7 +1297,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32155]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32155]</label>
                     <align>center</align>
                     <aligny>center</aligny>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
@@ -1310,7 +1321,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32156]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32156]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1332,7 +1343,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32157]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32157]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1439,7 +1450,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32067]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32067]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1460,7 +1471,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32068]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32068]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1495,7 +1506,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32166]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32166]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1516,7 +1527,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32154]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32154]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1551,7 +1562,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32002]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32002]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1572,7 +1583,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32166]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32166]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1610,7 +1621,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32153]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32153]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1637,7 +1648,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32152]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32152]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1665,7 +1676,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32151]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32151]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1700,7 +1711,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32002]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32002]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1721,7 +1732,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32154]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32154]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1760,7 +1771,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32153]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32153]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1781,7 +1792,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32152]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32152]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1809,7 +1820,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32151]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32151]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1849,7 +1860,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32122]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32122]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1877,7 +1888,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32127]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32127]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1908,7 +1919,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32123]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32123]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1929,7 +1940,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32012]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32012]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1950,7 +1961,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32129]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32129]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -1987,7 +1998,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32061]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32061]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2015,7 +2026,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32126]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32126]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2043,7 +2054,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32013]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32013]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2064,7 +2075,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32014]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32014]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2085,7 +2096,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32098]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32098]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2106,7 +2117,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32191]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32191]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2133,7 +2144,7 @@ id      | description
                 <font>font13</font>
                 <textcolor>FFFFFFFF</textcolor>
                 <focusedcolor>FFFFFFFF</focusedcolor>
-                <label>$ADDON[script.cdartmanager 32043]</label>
+                <label>$ADDON[script.cdartmanager-ng 32043]</label>
                 <aligny>center</aligny>
                 <align>center</align>
             </control>
@@ -2146,7 +2157,7 @@ id      | description
                 <font>font13</font>
                 <textcolor>FFFFFFFF</textcolor>
                 <focusedcolor>FFFFFFFF</focusedcolor>
-                <label>$ADDON[script.cdartmanager 32045]</label>
+                <label>$ADDON[script.cdartmanager-ng 32045]</label>
                 <aligny>center</aligny>
                 <align>center</align>
                 <label></label>
@@ -2160,7 +2171,7 @@ id      | description
                 <font>font13</font>
                 <textcolor>FFFFFFFF</textcolor>
                 <focusedcolor>FFFFFFFF</focusedcolor>
-                <label>$ADDON[script.cdartmanager 32044]</label>
+                <label>$ADDON[script.cdartmanager-ng 32044]</label>
                 <aligny>center</aligny>
                 <align>center</align>
             </control>
@@ -2192,7 +2203,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32002]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32002]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2213,7 +2224,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32004]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32004]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2248,7 +2259,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32002]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32002]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2269,7 +2280,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32004]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32004]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2311,7 +2322,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32121]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32121]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2332,7 +2343,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32120]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32120]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2375,7 +2386,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32121]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32121]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2396,7 +2407,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32120]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32120]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2432,7 +2443,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32002]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32002]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2460,7 +2471,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32004]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32004]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2510,7 +2521,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32121]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32121]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2531,7 +2542,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32120]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32120]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2574,7 +2585,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32121]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32121]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2595,7 +2606,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32120]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32120]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2631,7 +2642,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32002]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32002]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2659,7 +2670,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32004]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32004]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2708,7 +2719,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32121]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32121]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2729,7 +2740,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32120]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32120]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2772,7 +2783,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32121]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32121]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2793,7 +2804,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32120]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32120]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2829,7 +2840,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32002]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32002]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2857,7 +2868,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32004]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32004]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2907,7 +2918,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32121]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32121]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2928,7 +2939,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32120]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32120]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2971,7 +2982,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32121]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32121]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -2992,7 +3003,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32120]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32120]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -3029,7 +3040,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32002]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32002]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -3057,7 +3068,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32004]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32004]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -3095,7 +3106,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32001]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32001]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -3123,7 +3134,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32003]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32003]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -3151,7 +3162,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32006]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32006]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -3179,7 +3190,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32009]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32009]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -3207,7 +3218,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32144]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32144]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -3235,7 +3246,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32168]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32168]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -3263,7 +3274,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32011]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32011]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -3291,7 +3302,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32146]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32146]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
@@ -3312,7 +3323,7 @@ id      | description
                     <font>font13</font>
                     <textcolor>FFFFFFFF</textcolor>
                     <focusedcolor>FFFFFFFF</focusedcolor>
-                    <label>$ADDON[script.cdartmanager 32147]</label>
+                    <label>$ADDON[script.cdartmanager-ng 32147]</label>
                     <texturefocus border="5">cdman-button-focus.png</texturefocus>
                     <texturenofocus>-</texturenofocus>
                     <pulseonselect>false</pulseonselect>
