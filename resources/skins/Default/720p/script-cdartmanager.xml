@@ -1873,7 +1873,7 @@ id      | description
                     <onleft>9005</onleft>
                     <onright>113</onright>
                     <onclick>113</onclick>
-                    <onup>192</onup>
+                    <onup>191</onup>
                     <ondown>189</ondown>
                 </control>
                 <control type="radiobutton" id="189"> <!-- Edit By Album -->
@@ -1926,9 +1926,10 @@ id      | description
                     <onleft>9005</onleft>
                     <onright>9019</onright>
                     <onup>189</onup>
-                    <ondown>191</ondown>
+                    <ondown>188</ondown>
                 </control>
-                <control type="button" id="191"> <!-- Refresh Database -->
+                <!--
+                <control type="button" id="191"> <!-!- Refresh Database -!->
                     <description>Refresh Database</description>
                     <posx>10</posx>
                     <posy>125</posy>
@@ -1949,7 +1950,7 @@ id      | description
                     <onup>190</onup>
                     <ondown>192</ondown>
                 </control>
-                <control type="button" id="192"> <!-- Update Database -->
+                <control type="button" id="192"> <!-!- Update Database -!->
                     <description>Update Database</description>
                     <posx>10</posx>
                     <posy>165</posy>
@@ -1970,6 +1971,7 @@ id      | description
                     <onup>191</onup>
                     <ondown>188</ondown>
                 </control>
+                -->
             </control>
             <control type="group" id="9005"> <!-- Advanced Menu -->
                 <description>Advanced Menu</description>
@@ -2135,34 +2137,34 @@ id      | description
                 <height>50</height>
                 <texture>default-black.png</texture>
             </control>
-            <control type="label" id="109"> <!-- Local Artist Count -->
-                <description>Local Artist Count</description>
+            <control type="label" id="109"> <!-- Info-Label -->
+                <description>Info-Label 1</description>
                 <posx>10</posx>
                 <posy>680</posy>
-                <width>416</width>
+                <width>842</width>
                 <height>30</height>
                 <font>font13</font>
                 <textcolor>FFFFFFFF</textcolor>
                 <focusedcolor>FFFFFFFF</focusedcolor>
-                <label>$ADDON[script.cdartmanager-ng 32043]</label>
+                <label>...</label>
                 <aligny>center</aligny>
                 <align>center</align>
             </control>
-            <control type="label" id="110"> <!-- Local Album Count -->
-                <description>Local Album Count</description>
-                <posx>427</posx>
+            <control type="label" id="110"> <!-- Info-Label -->
+                <description>Info-Label 2</description>
+                <posx>853</posx>
                 <posy>680</posy>
                 <width>416</width>
                 <height>30</height>
                 <font>font13</font>
                 <textcolor>FFFFFFFF</textcolor>
                 <focusedcolor>FFFFFFFF</focusedcolor>
-                <label>$ADDON[script.cdartmanager-ng 32045]</label>
+                <label>$ADDON[script.cdartmanager-ng 32500]</label>
                 <aligny>center</aligny>
                 <align>center</align>
-                <label></label>
             </control>
-            <control type="label" id="112"> <!-- cdART count -->
+            <!--
+            <control type="label" id="112"> <!-!- cdART count -!->
                 <description>Local CDArt Count</description>
                 <posx>853</posx>
                 <posy>680</posy>
@@ -2175,6 +2177,7 @@ id      | description
                 <aligny>center</aligny>
                 <align>center</align>
             </control>
+            -->
             <control type="group" id="9001"> <!-- cdART Menu -->
                 <posx>0</posx>
                 <posy>300</posy>

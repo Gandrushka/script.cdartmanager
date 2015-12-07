@@ -42,6 +42,11 @@ def is_true(value):
     return value in ("true", "True")
 
 
+def is_mbid(mbid):
+    # a very basic check to validate a MBID
+    return mbid is not None and len(mbid) == 36 and len(mbid.replace("-", "")) == 32
+
+
 def sanitize_fs(text, force=False):
 
     if force or __settings__.getSettingBool("enable_replace_illegal"):

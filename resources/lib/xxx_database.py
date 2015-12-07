@@ -27,56 +27,6 @@ import utils
 __settings__ = settings.Settings()
 
 
-def precheck_crash():
-    if xbmcvfs.exists(__settings__.getDatabaseFileJournal()):
-        # if l_cdart.db.journal exists, creating database must have crashed at some point, delete and start over
-        # @TODO show dialog and restore latest backup
-        settings.log("Addon database crashed, resetting...", xbmc.LOGNOTICE)
-        if not __delete_db():
-            raise SystemExit("Failed to reset addon database, please delete these files manually:\n%s\n%s" %
-                             (__settings__.getDatabaseFile(), __settings__.getDatabaseFileJournal()))
-
-
-def startup():
-
-    if not xbmcvfs.exists(__settings__.getDatabaseFile()):  # if l_cdart.db missing, must be first run
-        settings.log("Addon database not found, will be created from GUI", xbmc.LOGNOTICE)
-    else:
-        settings.log("Addon database found, starting check for version %s" % constants.DB_VERSION, xbmc.LOGNOTICE)
-        try:
-            conn_l = sqlite3.connect(__settings__.getDatabaseFile())
-            c = conn_l.cursor()
-            c.execute("SELECT version FROM counts")
-            version = c.fetchall()
-            c.close()
-            if version[0][0] == constants.DB_VERSION:
-                settings.log("Database matched", xbmc.LOGNOTICE)
-            # migration paths can be defined here
-            else:
-                settings.log("Database not matched, no migration path defined - start from scratch.", xbmc.LOGNOTICE)
-                if xxx_utils.dialog_msg("yesno", heading=utils.lang(32108), line1=utils.lang(32109)):
-                    local_album_count, local_artist_count, local_cdart_count = refresh_db(True)
-
-        except StandardError, e:
-            traceback.print_exc()
-            settings.log("# Error: %s" % e.__class__.__name__, xbmc.LOGNOTICE)
-            try:
-                settings.log("Trying To Delete Database", xbmc.LOGNOTICE)
-                xbmcvfs.delete(__settings__.getDatabaseFile())
-            except StandardError, e:
-                traceback.print_exc()
-                settings.log("# unable to remove folder", xbmc.LOGNOTICE)
-                settings.log("# Error: %s" % e.__class__.__name__, xbmc.LOGNOTICE)
-                script_fail = True
-
-
-def __delete_db():
-    try:
-        xbmcvfs.delete(__settings__.getDatabaseFile())
-        xbmcvfs.delete(__settings__.getDatabaseFileJournal())
-        return True
-    except:
-        return False
 
 
 def __create_new_db():
@@ -612,47 +562,47 @@ def check_local_albumartist(album_artist, local_artist_list, background=False):
     return local_album_artist_list, artist_count
 
 
-def database_setup(background=False):
-    loglevel = xbmc.LOGNOTICE
-    cdart_existing = 0
-    album_count = 0
-    artist_count = 0
-    local_artist_count = 0
-    settings.log("Setting Up Database", loglevel)
-    settings.log("    addon_work_path: %s" % __settings__.getWorkBasePath(), loglevel)
-
-    if not xbmcvfs.exists(__settings__.getWorkFile("settings.xml")):
-        xxx_utils.dialog_msg("ok", heading=utils.lang(32071), line1=utils.lang(32072), line2=utils.lang(32073), background=background)
-        settings.log("Settings not set, aborting database creation", loglevel)
-        return album_count, artist_count, cdart_existing
-
-    local_album_list = get_xbmc_database_info(background=background)
-    if not local_album_list:
-        xxx_utils.dialog_msg("ok", heading=utils.lang(32130), line1=utils.lang(32131), background=background)
-        settings.log("XBMC Music Library does not exist, aborting database creation", loglevel)
-        return album_count, artist_count, cdart_existing
-
-    xxx_utils.dialog_msg("create", heading=utils.lang(32021), line1=utils.lang(20186), background=background)
-    # Onscreen Dialog - Creating Addon Database
-    settings.log("Creating tables...", loglevel)
-    __create_new_db()
-    settings.log("tables created.", loglevel)
-    store_counts(0, 0, 0, 0)
-    album_count, cdart_existing = store_alblist(local_album_list, background=background)  # store album details first
-    album_artist = retrieve_distinct_album_artists()  # then retrieve distinct album artists
-    local_artist_list = xxx_jsonrpc_calls.get_all_local_artists()  # retrieve local artists(to get idArtist)
-    local_album_artist_list, artist_count = check_local_albumartist(album_artist, local_artist_list, background=background)
-    count = store_lalist(local_album_artist_list, artist_count)  # then store in database
-    if __settings__.getExpEnableAllArtits():
-        local_artist_count = build_local_artist_table(background=background)
-    store_counts(local_artist_count, artist_count, album_count, cdart_existing)
-    if xxx_utils.dialog_msg("iscanceled", background=background):
-        xxx_utils.dialog_msg("close", background=background)
-        ok = xxx_utils.dialog_msg("ok", heading=utils.lang(32050), line1=utils.lang(32051), line2=utils.lang(32052),
-                                  line3=utils.lang(32053), background=background)
-    settings.log("Finished Storing Database", loglevel)
-    xxx_utils.dialog_msg("close", background=background)
-    return album_count, artist_count, cdart_existing
+# def database_setup(background=False):
+#     loglevel = xbmc.LOGNOTICE
+#     cdart_existing = 0
+#     album_count = 0
+#     artist_count = 0
+#     local_artist_count = 0
+#     settings.log("Setting Up Database", loglevel)
+#     settings.log("    addon_work_path: %s" % __settings__.getWorkBasePath(), loglevel)
+#
+#     if not xbmcvfs.exists(__settings__.getWorkFile("settings.xml")):
+#         xxx_utils.dialog_msg("ok", heading=utils.lang(32071), line1=utils.lang(32072), line2=utils.lang(32073), background=background)
+#         settings.log("Settings not set, aborting database creation", loglevel)
+#         return album_count, artist_count, cdart_existing
+#
+#     local_album_list = get_xbmc_database_info(background=background)
+#     if not local_album_list:
+#         xxx_utils.dialog_msg("ok", heading=utils.lang(32130), line1=utils.lang(32131), background=background)
+#         settings.log("XBMC Music Library does not exist, aborting database creation", loglevel)
+#         return album_count, artist_count, cdart_existing
+#
+#     xxx_utils.dialog_msg("create", heading=utils.lang(32021), line1=utils.lang(20186), background=background)
+#     # Onscreen Dialog - Creating Addon Database
+#     settings.log("Creating tables...", loglevel)
+#     __create_new_db()
+#     settings.log("tables created.", loglevel)
+#     store_counts(0, 0, 0, 0)
+#     album_count, cdart_existing = store_alblist(local_album_list, background=background)  # store album details first
+#     album_artist = retrieve_distinct_album_artists()  # then retrieve distinct album artists
+#     local_artist_list = xxx_jsonrpc_calls.get_all_local_artists()  # retrieve local artists(to get idArtist)
+#     local_album_artist_list, artist_count = check_local_albumartist(album_artist, local_artist_list, background=background)
+#     count = store_lalist(local_album_artist_list, artist_count)  # then store in database
+#     if __settings__.getExpEnableAllArtits():
+#         local_artist_count = build_local_artist_table(background=background)
+#     store_counts(local_artist_count, artist_count, album_count, cdart_existing)
+#     if xxx_utils.dialog_msg("iscanceled", background=background):
+#         xxx_utils.dialog_msg("close", background=background)
+#         ok = xxx_utils.dialog_msg("ok", heading=utils.lang(32050), line1=utils.lang(32051), line2=utils.lang(32052),
+#                                   line3=utils.lang(32053), background=background)
+#     settings.log("Finished Storing Database", loglevel)
+#     xxx_utils.dialog_msg("close", background=background)
+#     return album_count, artist_count, cdart_existing
 
 
 # retrieve the addon's database - saves time by no needing to search system for infomation on every addon access
@@ -834,47 +784,47 @@ def new_local_count():
         return 0, 0, 0, 0
 
 
-# user call from Advanced menu to refresh the addon's database
-def refresh_db(background=False):
-    settings.log("Refreshing Local Database")
-    local_album_count = 0
-    local_artist_count = 0
-    local_cdart_count = 0
-    if xbmcvfs.exists(__settings__.getDatabaseFile()):
-        # File exists needs to be deleted
-        if not background:
-            db_delete = xxx_utils.dialog_msg("yesno", line1=utils.lang(32042), line2=utils.lang(32015), background=background)
-        else:
-            db_delete = True
-        if db_delete:
-            if xbmcvfs.exists(__settings__.getDatabaseFile()):
-                # backup database
-                backup_database()
-                try:
-                    # try to delete exsisting database
-                    xbmcvfs.delete(__settings__.getDatabaseFile())
-                except:
-                    settings.log("Unable to delete Database")
-            if xbmcvfs.exists(__settings__.getDatabaseFile()):
-                # if database file still exists even after trying to delete it. Wipe out its contents
-                conn = sqlite3.connect(__settings__.getDatabaseFile())
-                c = conn.cursor()
-                c.execute('''DROP table IF EXISTS counts''')
-                c.execute('''DROP table IF EXISTS lalist''')  # drop local album artists database
-                c.execute('''DROP table IF EXISTS alblist''')  # drop local album database
-                c.execute('''DROP table IF EXISTS unqlist''')  # drop unique database
-                c.execute('''DROP table IF EXISTS local_artists''')
-                conn.commit()
-                c.close()
-            local_album_count, local_artist_count, local_cdart_count = database_setup(background=background)
-        else:
-            pass
-    else:
-        # If file does not exist and some how the program got here, create new database
-        local_album_count, local_artist_count, local_cdart_count = database_setup(background=background)
-    # update counts
-    settings.log("Finished Refeshing Database")
-    return local_album_count, local_artist_count, local_cdart_count
+# # user call from Advanced menu to refresh the addon's database
+# def refresh_db(background=False):
+#     settings.log("Refreshing Local Database")
+#     local_album_count = 0
+#     local_artist_count = 0
+#     local_cdart_count = 0
+#     if xbmcvfs.exists(__settings__.getDatabaseFile()):
+#         # File exists needs to be deleted
+#         if not background:
+#             db_delete = xxx_utils.dialog_msg("yesno", line1=utils.lang(32042), line2=utils.lang(32015), background=background)
+#         else:
+#             db_delete = True
+#         if db_delete:
+#             if xbmcvfs.exists(__settings__.getDatabaseFile()):
+#                 # backup database
+#                 backup_database()
+#                 try:
+#                     # try to delete exsisting database
+#                     xbmcvfs.delete(__settings__.getDatabaseFile())
+#                 except:
+#                     settings.log("Unable to delete Database")
+#             if xbmcvfs.exists(__settings__.getDatabaseFile()):
+#                 # if database file still exists even after trying to delete it. Wipe out its contents
+#                 conn = sqlite3.connect(__settings__.getDatabaseFile())
+#                 c = conn.cursor()
+#                 c.execute('''DROP table IF EXISTS counts''')
+#                 c.execute('''DROP table IF EXISTS lalist''')  # drop local album artists database
+#                 c.execute('''DROP table IF EXISTS alblist''')  # drop local album database
+#                 c.execute('''DROP table IF EXISTS unqlist''')  # drop unique database
+#                 c.execute('''DROP table IF EXISTS local_artists''')
+#                 conn.commit()
+#                 c.close()
+#             local_album_count, local_artist_count, local_cdart_count = database_setup(background=background)
+#         else:
+#             pass
+#     else:
+#         # If file does not exist and some how the program got here, create new database
+#         local_album_count, local_artist_count, local_cdart_count = database_setup(background=background)
+#     # update counts
+#     settings.log("Finished Refeshing Database")
+#     return local_album_count, local_artist_count, local_cdart_count
 
 
 def check_album_mbid(albums, background=False):

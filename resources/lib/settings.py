@@ -125,14 +125,10 @@ class Settings:
             return os.path.join(self.getWorkDir(dirname), filename)
 
     def getDataStoreBaseDir(self):
-        return self.getWorkDir("datastore")
+        return self.getWorkDir(constants.DS_DIR)
 
-    def getDataStoreDir(self, artist, album=None):
-        result = os.path.join(self.getDataStoreBaseDir(), artist, '')
-        if album is not None:
-            result = os.path.join(result, album, '')
-        if not xbmcvfs.exists(result):
-            xbmcvfs.mkdirs(result)
+    def getDataStoreFile(self, file_name):
+        result = os.path.join(self.getDataStoreBaseDir(), file_name)
         return result
 
     def getDatabaseFile(self):

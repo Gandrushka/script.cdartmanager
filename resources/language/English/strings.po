@@ -786,3 +786,9 @@ msgstr "     Delay between MusicBrainz Server requests(100's of Milliseconds)"
 msgctxt "#32191"
 msgid "Refresh fanart.tv data"
 msgstr "Refresh fanart.tv data"
+
+
+msgctxt "#32500"
+msgid "Working..."
+msgstr "Working..."
+
