@@ -26,6 +26,8 @@ class Datastore:
 
         # auto migration
         auto_migrate = False
+        is_artists_changed = False
+        is_albums_changed = False
 
         self.__artists = kodi_rpc.get_artists(not(__settings__.getExpEnableAllArtits()))
         self.__albums = kodi_rpc.get_albums()
@@ -37,9 +39,7 @@ class Datastore:
                 artist_name = utils.smart_unicode(artist['artist'])
                 if artist_name not in self.__addon_artists:
                     self.__addon_artists[artist_name] = {'mbid': utils.smart_unicode(artist['musicbrainzartistid'])}
-
-            # @TODO: save only if changed
-            self.save_addon_dict(constants.DS_ARTISTS_FILE, self.__addon_artists)
+                    is_artists_changed = True
 
         if self.__addon_albums is None:
             self.__addon_albums = self.load_addon_dict(constants.DS_ALBUMS_FILE)
@@ -49,18 +49,15 @@ class Datastore:
                 album_title = utils.smart_unicode(album['title'])
                 if (artist_name, album_title) not in self.__addon_albums:
                     self.__addon_albums[(artist_name, album_title)] = {'mbid': utils.smart_unicode(album['musicbrainzalbumid'])}
+                    is_albums_changed = True
                 # we update our artists here too, if we find an albumartist with mbid for an artist without mbid...
                 artist_mbid = utils.smart_unicode(album['musicbrainzalbumartistid'])
                 if artist_name not in self.__addon_artists:  # artist not found
                     self.__addon_artists[artist_name] = {'mbid': artist_mbid}
+                    is_artists_changed = True
                 if not utils.is_mbid(self.__addon_artists[artist_name]['mbid']) and utils.is_mbid(artist_mbid):  # present but empty mbid
                     self.__addon_artists[artist_name]["mbid"] = artist_mbid
-
-            # @TODO: save only if changed
-            self.save_addon_dict(constants.DS_ALBUMS_FILE, self.__addon_albums)
-
-        # debug
-        # auto_migrate = True
+                    is_artists_changed = True
 
         if auto_migrate:
             legacy_db = migrate.LegacyDB()
@@ -72,7 +69,7 @@ class Datastore:
                     legacy_artist_mbid = legacy_artist["artist_mbid"]
                     if legacy_artist_name in self.__addon_artists:
                         self.__addon_artists[legacy_artist_name]["mbid"] = legacy_artist_mbid
-                self.save_addon_dict(constants.DS_ARTISTS_FILE, self.__addon_artists)
+                        is_artists_changed = True
 
                 legacy_albums = legacy_db.get_albums()
                 for legacy_album in legacy_albums:
@@ -82,11 +79,13 @@ class Datastore:
                     legacy_album_mbid = legacy_album["album_mbid"]
                     if legacy_album_key in self.__addon_albums:
                         self.__addon_albums[legacy_album_key]["mbid"] = legacy_album_mbid
+                        is_albums_changed = True
                     if legacy_artist_name not in self.__addon_artists:  # artist not found
                         self.__addon_artists[legacy_artist_name] = {'mbid': legacy_artist_mbid}
+                        is_artists_changed = True
                     if not utils.is_mbid(self.__addon_artists[legacy_artist_name]['mbid']) and utils.is_mbid(legacy_artist_mbid):  # present but empty mbid
                         self.__addon_artists[legacy_artist_name]["mbid"] = legacy_artist_mbid
-                self.save_addon_dict(constants.DS_ALBUMS_FILE, self.__addon_albums)
+                        is_artists_changed = True
 
         canceled = False
 
@@ -103,6 +102,7 @@ class Datastore:
                         if canceled:
                             break
                     self._complement_album_mbid(album_entry, check_albums_online)
+            self.save_addon_dict(constants.DS_ALBUMS_FILE, self.__addon_albums)
 
         if not canceled:
             artist_len = self.artists_count()
@@ -114,6 +114,8 @@ class Datastore:
                     if canceled:
                         break
                 self._complement_artist_mbid(artist_entry, check_artists_online)
+            # @TODO: save file
+            self.save_addon_dict(constants.DS_ARTISTS_FILE, self.__addon_artists)
 
         if canceled:
             #  @TODO clean up (and exit script?)
@@ -230,3 +232,46 @@ class Datastore:
             pass
 
         return result
+
+
+class AddonData:
+
+    def __init__(self, initial_dict=None):
+
+        if initial_dict is None:
+            self.__dict = {}
+        else:
+            self.__dict = initial_dict
+
+        self.__is_changed = False
+
+    def set_dict_value(self, key, valuekey, value):
+        if key not in self.__dict:
+            self.__dict[key] = {}
+            self.__dict[key][valuekey] = value
+            self.__is_changed = True
+            return
+
+        if valuekey not in self.__dict[key] or self.__dict[key][valuekey] != value:
+            self.__dict[key][valuekey] = value
+            self.__is_changed = True
+            return
+
+    def get_dict_value(self, key, valuekey):
+
+        if key not in self.__dict and valuekey in self.__dict[key]:
+            return self.__dict[key][valuekey]
+        else:
+            return None
+
+    @property
+    def is_changed(self):
+        return self.is_changed
+
+
+class ArtistAddonData(AddonData):
+    pass
+
+
+class AlbumAddonData(AddonData):
+    pass

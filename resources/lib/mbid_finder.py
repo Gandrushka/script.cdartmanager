@@ -1,13 +1,13 @@
-import xbmc
 import time
-import requests
-import constants
-import utils
 import xml.etree.ElementTree as ET
 
-import xxx_musicbrainz
+import requests
+import xbmc
 
+import constants
 import settings
+import utils
+
 __settings__ = settings.Settings()
 
 
@@ -26,8 +26,7 @@ class MBIDFinder:
         settings.log("MBIDFinder starting, artist=%s, album=%s" % (self.artist_name, self.album_name))
         mbid_result = MBIDResult()
         if not mbid_result.has_result:
-            pass
-            # mbid_result = TadbMBIDFinder(self.artist_name, self.album_name).find()
+            mbid_result = TadbMBIDFinder(self.artist_name, self.album_name).find()
         if not mbid_result.has_result:
             mbid_result = MusicbrainzMBIDFinder(self.artist_name, self.album_name).find()
         return mbid_result
@@ -92,30 +91,20 @@ class MusicbrainzMBIDFinder(MBIDFinder):
             # Musicbrainz artist search
             if not result.has_result:
                 url = constants.MUSICBRAINZ_ARTIST_SERVLET
-                params = {'query': 'artist:"%s"' % self.artist_name, 'limit': 1}
-                r = ThrottledMusicbrainzRequest().get(url, params, headers={'user-agent': __settings__.getUserAgent()})
-                xml = ET.fromstring(r.text)
-                if all(x in xml.tag for x in ["{", "}"]):
-                    ns = xml.tag[xml.tag.find("{"):xml.tag.find("}") + 1]
-                else:
-                    ns = ""
-                artist_element = xml.find(".//%sartist[@id]" % ns)
-                if artist_element is not None and utils.is_mbid(artist_element.get("id", None)):
-                    result.artist_mbid = artist_element.get("id")
+                params = {'fmt': 'json', 'query': '"%s"' % self.artist_name, 'limit': 1}
 
-            # Musicbrainz alias search
-            if not result.has_result:
-                url = constants.MUSICBRAINZ_ARTIST_SERVLET
-                params = {'query': 'alias:"%s"' % self.artist_name, 'limit': 1}
-                r = ThrottledMusicbrainzRequest().get(url, params, headers={'user-agent': __settings__.getUserAgent()})
-                xml = ET.fromstring(r.text)
-                if all(x in xml.tag for x in ["{", "}"]):
-                    ns = xml.tag[xml.tag.find("{"):xml.tag.find("}") + 1]
-                else:
-                    ns = ""
-                artist_element = xml.find(".//%sartist[@id]" % ns)
-                if artist_element is not None and utils.is_mbid(artist_element.get("id", None)):
-                    result.artist_mbid = artist_element.get("id")
+                try:
+                    r = ThrottledMusicbrainzRequest().get(url, params, headers={'user-agent': __settings__.getUserAgent()})
+                    settings.log("MusicbrainzMBIDFinder url: %s" % r.url)
+                    json = r.json()
+                    if "artists" in json and json["artists"] is not None and len(json["artists"]) > 0:
+                        bestmatch = json["artists"][0]
+                        if "id" in bestmatch and utils.is_mbid(bestmatch["id"]):
+                            result.artist_mbid = bestmatch["id"]
+
+                    settings.log("Musicbrainz result: artist=%s, album=%s" % (result.artist_mbid, result.album_mbid))
+                except:
+                    settings.log("Musicbrainz result: failed")
 
         return result
 
