@@ -26,8 +26,15 @@ class MBIDFinder:
         settings.log("MBIDFinder starting, artist=%s, album=%s" % (self.artist_name, self.album_name))
         mbid_result = MBIDResult()
         if not mbid_result.has_result:
+            # first try Tadb...
             mbid_result = TadbMBIDFinder(self.artist_name, self.album_name).find()
         if not mbid_result.has_result:
+            # then cleanup name and retry...
+            rn = RealNameFinder(self.artist_name, self.album_name).find()
+            if rn.artist_name != self.artist_name or rn.album_name != self.album_name:
+                mbid_result = TadbMBIDFinder(rn.artist_name, rn.album_name).find()
+        if not mbid_result.has_result:
+            # fallback to slower services.
             mbid_result = MusicbrainzMBIDFinder(self.artist_name, self.album_name).find()
         return mbid_result
 
@@ -35,17 +42,15 @@ class MBIDFinder:
 class TadbMBIDFinder(MBIDFinder):
 
     def find(self):
-        settings.log("TadbMBIDFinder starting, artist=%s, album=%s" % (self.artist_name, self.album_name))
+        settings.log("  TadbMBIDFinder starting, artist=%s, album=%s" % (self.artist_name, self.album_name))
         result = MBIDResult()
         if self.artist_name is not None:
-
             if self.album_name is not None:
                 url = constants.TADB_ALBUM_SERVLET
                 params = {'s': self.artist_name, 'a': self.album_name}
             else:
                 url = constants.TADB_ARTIST_SERVLET
                 params = {'s': self.artist_name}
-
             try:
                 r = requests.get(url, params, headers={'user-agent': __settings__.getUserAgent()})
                 json = r.json()
@@ -59,9 +64,9 @@ class TadbMBIDFinder(MBIDFinder):
                         result.album_mbid = bestmatch["strMusicBrainzID"]
                     if "strMusicBrainzArtistID" in bestmatch and utils.is_mbid(bestmatch["strMusicBrainzArtistID"]):
                         result.artist_mbid = bestmatch["strMusicBrainzArtistID"]
-                settings.log("TheAudioDB result: artist=%s, album=%s" % (result.artist_mbid, result.album_mbid))
+                settings.log("  TheAudioDB result: artist=%s, album=%s" % (result.artist_mbid, result.album_mbid))
             except:
-                settings.log("TheAudioDB result: failed")
+                settings.log("  TheAudioDB result: failed")
         return result
 
 
@@ -69,7 +74,7 @@ class MusicbrainzMBIDFinder(MBIDFinder):
 
     def find(self):
 
-        settings.log("MusicbrainzMBIDFinder starting, artist=%s, album=%s" % (self.artist_name, self.album_name))
+        settings.log("  MusicbrainzMBIDFinder starting, artist=%s, album=%s" % (self.artist_name, self.album_name))
         result = MBIDResult()
 
         # if self.album_name is not None:
@@ -91,20 +96,21 @@ class MusicbrainzMBIDFinder(MBIDFinder):
             # Musicbrainz artist search
             if not result.has_result:
                 url = constants.MUSICBRAINZ_ARTIST_SERVLET
-                params = {'fmt': 'json', 'query': '"%s"' % self.artist_name, 'limit': 1}
+                params = dict(constants.MUSICBRAINZ_DEFAULT_PARAMS)
+                params.update({'query': '"%s"' % self.artist_name})
 
                 try:
                     r = ThrottledMusicbrainzRequest().get(url, params, headers={'user-agent': __settings__.getUserAgent()})
-                    settings.log("MusicbrainzMBIDFinder url: %s" % r.url)
+                    settings.log("  MusicbrainzMBIDFinder url: %s" % r.url)
                     json = r.json()
                     if "artists" in json and json["artists"] is not None and len(json["artists"]) > 0:
                         bestmatch = json["artists"][0]
                         if "id" in bestmatch and utils.is_mbid(bestmatch["id"]):
                             result.artist_mbid = bestmatch["id"]
 
-                    settings.log("Musicbrainz result: artist=%s, album=%s" % (result.artist_mbid, result.album_mbid))
+                    settings.log("  Musicbrainz result: artist=%s, album=%s" % (result.artist_mbid, result.album_mbid))
                 except:
-                    settings.log("Musicbrainz result: failed")
+                    settings.log("  Musicbrainz result: failed")
 
         return result
 
@@ -129,12 +135,12 @@ class ThrottledMusicbrainzRequest:
             msecs_since_last = int(time.time() * 1000) - self.get_last_request()
             if msecs_since_last < constants.MUSICBRAINZ_DELAY:
                 delay = constants.MUSICBRAINZ_DELAY - msecs_since_last
-                settings.log("%sms since last Musicbrainz-request, delay %sms" % (msecs_since_last, delay))
+                settings.log("  %sms since last Musicbrainz-request, delay %sms" % (msecs_since_last, delay))
                 xbmc.sleep(delay)
             else:
-                settings.log("%sms since last Musicbrainz-request, no delay" % msecs_since_last)
+                settings.log("  %sms since last Musicbrainz-request, no delay" % msecs_since_last)
         else:
-            settings.log("No last Musicbrainz-request, no delay")
+            settings.log("  No last Musicbrainz-request, no delay")
 
         result = requests.get(url, params, **kwargs)
         self.set_last_request(int(time.time() * 1000))
@@ -175,3 +181,91 @@ class MBIDResult:
     @property
     def has_album_mbid(self):
         return utils.is_mbid(self.album_mbid)
+
+
+# Modules to find the "real" name of an artist/album
+class RealNameFinder:
+
+    def __init__(self, artist_name, album_name=None):
+        self.artist_name = artist_name
+        self.album_name = album_name
+        pass
+
+    def find(self):
+        if self.__class__.__name__ != "RealNameFinder":
+            raise NotImplementedError
+
+        settings.log("    RealNameFinder starting, artist=%s, album=%s" % (self.artist_name, self.album_name))
+        realname_result = RealNameResult()
+        if not realname_result.has_result:
+            realname_result = AppleRealNameFinder(self.artist_name, self.album_name).find()
+        return realname_result
+
+
+class AppleRealNameFinder(RealNameFinder):
+
+    def find(self):
+        settings.log("      AppleRealNameFinder starting, artist=%s, album=%s" % (self.artist_name, self.album_name))
+        result = RealNameResult()
+        if self.artist_name is not None:
+            url = constants.APPLE_SERVLET
+            params = dict(constants.APPLE_DEFAULT_PARAMS)
+            if self.album_name is not None:
+                params.update({'term': self.artist_name + " " + self.album_name, "entity": "album"})
+            else:
+                params.update({'term': self.artist_name, "entity": "musicArtist"})
+
+            try:
+                r = requests.get(url, params, headers={'user-agent': __settings__.getUserAgent()})
+                json = r.json()
+
+                if "resultCount" in json and json["resultCount"] > 0:
+                    wrapper_type = json["results"][0]["wrapperType"]
+                    if wrapper_type == 'artist':
+                        result.artist_name = json["results"][0]["artistName"]
+                    if wrapper_type == 'collection':
+                        result.artist_name = json["results"][0]["artistName"]
+                        result.album_name = json["results"][0]["collectionName"]
+                settings.log("      AppleRealNameFinder result: artist=%s, album=%s" % (result.artist_name, result.album_name))
+            except:
+                settings.log("      AppleRealNameFinder result: failed")
+
+        return result
+
+
+class RealNameResult:
+
+    def __init__(self, artist_name=None, album_name=None):
+        self.__artist_name = artist_name
+        self.__album_name = album_name
+        pass
+
+    @property
+    def has_result(self):
+        return self.has_artist_name or self.has_album_name
+
+    @property
+    def artist_name(self):
+        return self.__artist_name
+
+    @artist_name.setter
+    def artist_name(self, value):
+        self.__artist_name = value
+
+    @property
+    def has_artist_name(self):
+        return self.artist_name is not None and self.artist_name != ""
+
+    @property
+    def album_name(self):
+        return self.__album_name
+
+    @album_name.setter
+    def album_name(self, value):
+        self.__album_name = value
+
+    @property
+    def has_album_name(self):
+        return self.album_name is not None and self.album_name != ""
+
+

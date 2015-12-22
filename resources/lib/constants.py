@@ -32,14 +32,19 @@ FANARTTV_SERVER = "http://webservice.fanart.tv"
 FANARTTV_MUSIC_BASE_URL = "%(server)s/v3/music/%%(mbid)s?api_key=%(api_key)s" % {'server': FANARTTV_SERVER, 'api_key': FANARTTV_API_KEY}
 FANARTTV_MUSIC_LATEST_URL = "%(server)s/v3/music/latest?api_key=%(api_key)s&date=%%(date_code)s" % {'server': FANARTTV_SERVER, 'api_key': FANARTTV_API_KEY}
 
-MUSICBRAINZ_DELAY = 1000
-MUSICBRAINZ_SERVER = "http://musicbrainz.org"
-MUSICBRAINZ_ARTIST_SERVLET = "%(server)s/ws/2/artist/" % {'server': MUSICBRAINZ_SERVER}
-
 TADB_API_KEY = "9982148621896198621597"
 TADB_SERVER = "http://www.theaudiodb.com"
 TADB_ARTIST_SERVLET = "%(server)s/api/v1/json/%(api_key)s/search.php" % {'server': TADB_SERVER, 'api_key': TADB_API_KEY}
 TADB_ALBUM_SERVLET = "%(server)s/api/v1/json/%(api_key)s/searchalbum.php" % {'server': TADB_SERVER, 'api_key': TADB_API_KEY}
+
+MUSICBRAINZ_DELAY = 1000
+MUSICBRAINZ_SERVER = "http://musicbrainz.org"
+MUSICBRAINZ_ARTIST_SERVLET = "%(server)s/ws/2/artist/" % {'server': MUSICBRAINZ_SERVER}
+MUSICBRAINZ_DEFAULT_PARAMS = {'fmt': 'json', 'limit': 1}
+
+APPLE_SERVER = "http://itunes.apple.com"
+APPLE_SERVLET = "%(server)s/search" % {'server': APPLE_SERVER}
+APPLE_DEFAULT_PARAMS = {"media": "music", "limit": 1}
 
 COLORS = {"white": "FFFFFFFF", "blue": "FF0000FF", "cyan": "FF00FFFF", "violet": "FFEE82EE", "pink": "FFFF1493",
           "red": "FFFF0000", "green": "FF00FF00", "yellow": "FFFFFF00", "orange": "FFFF4500"}
