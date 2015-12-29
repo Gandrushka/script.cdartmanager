@@ -102,6 +102,7 @@ class Datastore:
                         if canceled:
                             break
                     self._complement_album_mbid(album_entry, check_albums_online)
+            # @TODO: save file
             self.save_addon_dict(constants.DS_ALBUMS_FILE, self.__addon_albums)
 
         if not canceled:
@@ -144,9 +145,9 @@ class Datastore:
                     # @TODO save file
             elif online:
                 mbid = mbid_finder.MBIDFinder(artist_entry['artist']).find()
-                if utils.is_mbid(mbid.artist_mbid):
-                    artist_entry['mbid'] = mbid.artist_mbid
-                    self.__addon_artists[artist_name]['mbid'] = mbid.artist_mbid
+                if utils.is_mbid(mbid.artist):
+                    artist_entry['mbid'] = mbid.artist
+                    self.__addon_artists[artist_name]['mbid'] = mbid.artist
                     # @TODO save file
 
     def _complement_album_mbid(self, album_entry, online=False):
@@ -169,19 +170,20 @@ class Datastore:
             elif online:
                 # musicbrainz_albuminfo, discard = xxx_musicbrainz.get_musicbrainz_album(album_title, album_artist, 0, 1)
                 mbid_result = mbid_finder.MBIDFinder(album_artist, album_name).find()
-                if mbid_result.has_album_mbid:
-                        album_entry['mbid'] = mbid_result.album_mbid
-                        self.__addon_albums[album_key]['mbid'] = mbid_result.album_mbid
-                if mbid_result.has_artist_mbid:
+                if mbid_result.has_album:
+                        album_entry['mbid'] = mbid_result.album
+                        self.__addon_albums[album_key]['mbid'] = mbid_result.album
+                if mbid_result.has_artist:
                     artist_entry = self.artists_find_artist(album_artist)
                     if artist_entry is not None:
                         # we update the artist here if present, this saves an API call to find the artist by name later
-                        artist_entry['mbid'] = mbid_result.artist_mbid
-                        self.__addon_artists[album_artist]['mbid'] = mbid_result.artist_mbid
+                        artist_entry['mbid'] = mbid_result.artist
+                        self.__addon_artists[album_artist]['mbid'] = mbid_result.artist
                         # @TODO save file
 
     def artists_find_artist(self, artist_name):
-        return next((item for item in self.__artists if item["artist"] == artist_name), None)
+        artist = utils.smart_unicode(artist_name)
+        return next((item for item in self.__artists if utils.smart_unicode(item["artist"]) == artist), None)
 
     def artists_count(self):
         return len(self.__artists)
@@ -190,7 +192,9 @@ class Datastore:
         return len([item for item in self.__artists if item["mbid"] is None])
 
     def albums_find(self, album_artist_name, album_title):
-        return next((item for item in self.__albums if item["artist"] == album_artist_name and item["album"] == album_title), None)
+        artist = utils.smart_unicode(album_artist_name)
+        album = utils.smart_unicode(album_title)
+        return next((item for item in self.__albums if utils.smart_unicode(item["artist"]) == artist and utils.smart_unicode(item["album"]) == album), None)
 
     def albums_count(self):
         return len(self.__albums)
@@ -211,6 +215,7 @@ class Datastore:
                 if isinstance(key, list):
                     key = tuple(key)
                 result[key] = item["v"]
+        settings.log(result)
         return result
 
     @staticmethod
@@ -266,7 +271,7 @@ class AddonData:
 
     @property
     def is_changed(self):
-        return self.is_changed
+        return self.__is_changed
 
 
 class ArtistAddonData(AddonData):

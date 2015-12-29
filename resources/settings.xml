@@ -53,6 +53,7 @@
         -->
         <setting label="32142" type="bool" id="enable_all_artists" default="false" />
         <setting label="32136" type="bool" id="update_musicbrainz" default="true" />
+        <setting label="32501" type="text" id="va_aliases" default="Various Artists,Verschiedene Interpreten" />
         <setting type="sep" />
         <setting label="32148" type="lsep" />
         <setting label="32114" type="bool" id="check_mbid" default="false" />

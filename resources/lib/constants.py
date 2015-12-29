@@ -40,7 +40,12 @@ TADB_ALBUM_SERVLET = "%(server)s/api/v1/json/%(api_key)s/searchalbum.php" % {'se
 MUSICBRAINZ_DELAY = 1000
 MUSICBRAINZ_SERVER = "http://musicbrainz.org"
 MUSICBRAINZ_ARTIST_SERVLET = "%(server)s/ws/2/artist/" % {'server': MUSICBRAINZ_SERVER}
+MUSICBRAINZ_ALBUM_SERVLET = "%(server)s/ws/2/release/" % {'server': MUSICBRAINZ_SERVER}
 MUSICBRAINZ_DEFAULT_PARAMS = {'fmt': 'json', 'limit': 1}
+
+MUSICBRAINZ_VA_MBID = "89ad4ac3-39f7-470e-963a-56509c546377"
+MUSICBRAINZ_VA_SERVLET = "%(server)s/ws/2/artist/%(va)s" % {'server': MUSICBRAINZ_SERVER, 'va': MUSICBRAINZ_VA_MBID}
+MUSICBRAINZ_VA_PARAMS = {'fmt': 'json', 'inc': 'aliases'}
 
 APPLE_SERVER = "http://itunes.apple.com"
 APPLE_SERVLET = "%(server)s/search" % {'server': APPLE_SERVER}

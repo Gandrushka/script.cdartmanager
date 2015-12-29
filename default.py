@@ -47,7 +47,7 @@ if __name__ == "__main__":
             xbmcgui.Window(10000).setProperty("cdart_manager_allartist", "False")
 
         xbmc.executebuiltin('Dialog.Close(all, true)')
-        ui = gui.GUI("script-cdartmanager.xml", __settings__.getPath(), "Default")  # GUI("script-cdartmanager.xml", __addon__.getAddonInfo('path'), "Default")
+        ui = gui.GUI("script-cdartmanager.xml", __settings__.getPath(), "Default")
         xbmc.sleep(500)
         ui.doModal()
         del ui
