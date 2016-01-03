@@ -21,18 +21,28 @@
                 <bottom>40</bottom>
 
                 <control type="group"> <!-- Left -->
-                    <width>280</width>
+                    <width>350</width>
                     <control type="group"> <!-- Logo -->
                         <height>100</height>
                         <control type="image">  <!-- Logo Background -->
                             <texture>textures/95_lightgreen.png</texture>
                         </control>
                         <control type="image">  <!-- Logo -->
-                            <centerleft>140</centerleft>
-                            <centertop>50</centertop>
-                            <width>64</width>
-                            <height>64</height>
-                            <texture>icon.png</texture>
+                            <left>0</left>
+                            <top>0</top>
+                            <width>100</width>
+                            <height>100</height>
+                            <texture>icon.jpg</texture>
+                        </control>
+                        <control type="label">
+                            <top>30</top>
+                            <left>110</left>
+                            <width>240</width>
+                            <height>100</height>
+                            <font>font13</font>
+                            <align>left</align>
+                            <label>cdART Manager</label>
+                            <textcolor>ffffffff</textcolor>
                         </control>
                     </control>
 
@@ -47,19 +57,19 @@
 
                             <itemlayout height="100">
                                 <control type="image">
-                                    <left>30</left>
+                                    <top>20</top>
+                                    <left>20</left>
                                     <width>50</width>
                                     <height>50</height>
-                                    <centertop>50</centertop>
                                     <info>Listitem.ActualIcon</info>
                                     <colordiffuse>ff95a5a6</colordiffuse>
                                 </control>
                                 <control type="label">
-                                    <left>110</left>
-                                    <width>150</width>
+                                    <top>25</top>
+                                    <left>90</left>
+                                    <width>240</width>
                                     <height>100</height>
                                     <font>font13</font>
-                                    <aligny>center</aligny>
                                     <align>left</align>
                                     <info>ListItem.Label</info>
                                     <textcolor>ff95a5a6</textcolor>
@@ -68,25 +78,25 @@
 
                             <focusedlayout height="100">
                                 <control type="image">
-                                    <width>280</width>
+                                    <top>10</top>
+                                    <width>350</width>
                                     <height>70</height>
-                                    <centertop>50</centertop>
                                     <texture>textures/95_darkblue.png</texture>
                                 </control>
                                 <control type="image">
-                                    <left>30</left>
+                                    <top>20</top>
+                                    <left>20</left>
                                     <width>50</width>
                                     <height>50</height>
-                                    <centertop>50</centertop>
                                     <info>Listitem.ActualIcon</info>
                                     <colordiffuse>0xff26ad5e</colordiffuse>
                                 </control>
                                 <control type="label">
-                                    <left>110</left>
-                                    <width>150</width>
+                                    <top>25</top>
+                                    <left>90</left>
                                     <height>100</height>
+                                    <width>240</width>
                                     <font>font13</font>
-                                    <aligny>center</aligny>
                                     <align>left</align>
                                     <info>ListItem.Label</info>
                                 </control>
@@ -98,8 +108,8 @@
 
                 </control>
 
-                <control type="group"> <!-- Right -->
-                    <left>280</left>
+                <control type="group" id="9200"> <!-- Right -->
+                    <left>350</left>
 
                     <control type="group"> <!-- Top -->
                         <height>102</height>
@@ -113,12 +123,12 @@
                             <texture>textures/95_lightgray.png</texture>
                         </control>
 
-                        <control type="label">
+                        <control type="label" id="9201">
                             <font>font13</font>
                             <left>110</left>
                             <aligny>center</aligny>
                             <align>center</align>
-                            <label>cdART Manager NG</label>
+                            <label>Welcome</label>
                             <textcolor>ff27ae60</textcolor>
                         </control>
 
@@ -149,6 +159,8 @@
             </control>
 
         </control>
+
+
 
     </controls>
 

@@ -12,6 +12,7 @@ KEY_BUTTON_BACK = 275
 KEY_KEYBOARD_ESC = 61467
 
 CONTROLID_MAIN_MENU = 9100
+CONTROLID_TOP_LABEL = 9201
 
 
 class GUI(xbmcgui.WindowXMLDialog):
@@ -31,6 +32,7 @@ class GUI(xbmcgui.WindowXMLDialog):
             xbmcgui.ListItem(utils.lang(32504), "EXIT", iconImage="icons/ic_power_settings_new_white_48dp_2x.png"),
         ]
         self.__main_menu.addItems(main_items)
+        self.setSelected(self.__main_menu.getSelectedItem())
         self.setFocus(self.__main_menu)
 
     def onClick(self, control_id):
@@ -51,13 +53,17 @@ class GUI(xbmcgui.WindowXMLDialog):
             self.setFocusId(CONTROLID_MAIN_MENU)
 
         if self.__main_menu is not None:
-            self.__main_selected = self.__main_menu.getSelectedItem()
+            self.setSelected(self.__main_menu.getSelectedItem())
 
         if self.__main_selected is not None:
             pass
 
         if action.getButtonCode() in (KEY_BUTTON_BACK, KEY_KEYBOARD_ESC):
             self.exit()
+
+    def setSelected(self, control):
+        self.__main_selected = control
+        self.getControl(CONTROLID_TOP_LABEL).setLabel(self.__main_selected.getLabel())
 
     def exit(self):
         self.close()
