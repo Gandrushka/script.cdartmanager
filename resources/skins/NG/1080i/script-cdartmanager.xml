@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+
+    <controls>
+
+        <control type="group"> <!-- Main -->
+            <left>0</left>
+            <top>0</top>
+            <right>0</right>
+            <bottom>0</bottom>
+            <control type="image">  <!-- Background -->
+                <texture>wallpaper.jpg</texture>
+                <aspectratio>scale</aspectratio>
+            </control>
+
+            <control type="group"> <!-- Wrapper -->
+
+                <left>40</left>
+                <right>40</right>
+                <top>40</top>
+                <bottom>40</bottom>
+
+                <control type="group"> <!-- Left -->
+                    <width>280</width>
+                    <control type="group"> <!-- Logo -->
+                        <height>100</height>
+                        <control type="image">  <!-- Logo Background -->
+                            <texture>textures/95_lightgreen.png</texture>
+                        </control>
+                        <control type="image">  <!-- Logo -->
+                            <centerleft>140</centerleft>
+                            <centertop>50</centertop>
+                            <width>64</width>
+                            <height>64</height>
+                            <texture>icon.png</texture>
+                        </control>
+                    </control>
+
+                    <control type="group"> <!-- Menu -->
+                        <top>100</top>
+                        <bottom>0</bottom>
+                        <control type="image">  <!-- Menu Background -->
+                            <texture>textures/95_blue.png</texture>
+                        </control>
+
+                        <control type="list" id="9100"> <!-- Menu -->
+
+                            <itemlayout height="100">
+                                <control type="image">
+                                    <left>30</left>
+                                    <width>50</width>
+                                    <height>50</height>
+                                    <centertop>50</centertop>
+                                    <info>Listitem.ActualIcon</info>
+                                    <colordiffuse>ff95a5a6</colordiffuse>
+                                </control>
+                                <control type="label">
+                                    <left>110</left>
+                                    <width>150</width>
+                                    <height>100</height>
+                                    <font>font13</font>
+                                    <aligny>center</aligny>
+                                    <align>left</align>
+                                    <info>ListItem.Label</info>
+                                    <textcolor>ff95a5a6</textcolor>
+                                </control>
+                            </itemlayout>
+
+                            <focusedlayout height="100">
+                                <control type="image">
+                                    <width>280</width>
+                                    <height>70</height>
+                                    <centertop>50</centertop>
+                                    <texture>textures/95_darkblue.png</texture>
+                                </control>
+                                <control type="image">
+                                    <left>30</left>
+                                    <width>50</width>
+                                    <height>50</height>
+                                    <centertop>50</centertop>
+                                    <info>Listitem.ActualIcon</info>
+                                    <colordiffuse>0xff26ad5e</colordiffuse>
+                                </control>
+                                <control type="label">
+                                    <left>110</left>
+                                    <width>150</width>
+                                    <height>100</height>
+                                    <font>font13</font>
+                                    <aligny>center</aligny>
+                                    <align>left</align>
+                                    <info>ListItem.Label</info>
+                                </control>
+                            </focusedlayout>
+
+                        </control>
+
+                    </control>
+
+                </control>
+
+                <control type="group"> <!-- Right -->
+                    <left>280</left>
+
+                    <control type="group"> <!-- Top -->
+                        <height>102</height>
+                        <control type="image">  <!-- Background -->
+                            <height>100</height>
+                            <texture>textures/95_white.png</texture>
+                        </control>
+                        <control type="image">  <!-- Border -->
+                            <top>100</top>
+                            <height>2</height>
+                            <texture>textures/95_lightgray.png</texture>
+                        </control>
+
+                        <control type="label">
+                            <font>font13</font>
+                            <left>110</left>
+                            <aligny>center</aligny>
+                            <align>center</align>
+                            <label>cdART Manager NG</label>
+                            <textcolor>ff27ae60</textcolor>
+                        </control>
+
+                    </control>
+
+                    <control type="group"> <!-- Middle -->
+                        <top>102</top>
+                        <control type="image">  <!-- Background -->
+                            <height>200</height>
+                            <texture>textures/95_white.png</texture>
+                        </control>
+                        <control type="image">  <!-- Border -->
+                            <top>200</top>
+                            <height>2</height>
+                            <texture>textures/95_mediumgray.png</texture>
+                        </control>
+                    </control>
+
+                    <control type="group"> <!-- Bottom -->
+                        <top>304</top>
+                        <control type="image">  <!-- Menu Background -->
+                            <texture>textures/95_lightgray.png</texture>
+                        </control>
+                    </control>
+
+                </control>
+
+            </control>
+
+        </control>
+
+    </controls>
+
+</window>

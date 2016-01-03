@@ -106,7 +106,7 @@ class Settings:
         return xbmc.translatePath(os.path.join(self.getPath(), constants.ADDON_DIRNAME_RESOURCES))
 
     def getSkinImage(self, filename):
-        return os.path.join(self.getResourceBasePath(), "skins", "Default", "media", filename)
+        return os.path.join(self.getResourceBasePath(), "skins", constants.SKIN_FOLDER, "media", filename)
 
     # Working directory and related functions
     def getWorkBasePath(self):

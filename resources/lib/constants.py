@@ -6,6 +6,8 @@ ADDON_BRANCH = "NG"
 ADDON_FILENAME_SETTINGS = "settings.xml"
 ADDON_DIRNAME_RESOURCES = "resources"
 
+SKIN_FOLDER = "NG"
+
 LOG_DEFAULTLEVEL = xbmc.LOGNOTICE
 LOG_STARTUP_BORDER = "###########################################################"
 LOG_STARTUP_LINE = "# %-55s #"

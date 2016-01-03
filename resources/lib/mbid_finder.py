@@ -102,8 +102,10 @@ class MBIDFinder(ArtistAlbum):
     def find(self):
         if self.__class__.__name__ != 'MBIDFinder':
             raise NotImplementedError
+
         mbid_result = MBIDResult()
-        settings.log('MBIDFinder starting, %s' % self)
+        settings.log('MBIDFinder starting, %s' % self, xbmc.LOGNOTICE)
+
         mb_va = MusicBrainzVA()
         if mb_va.is_va(self.artist):
             mbid_result.artist = constants.MUSICBRAINZ_VA_MBID
@@ -130,7 +132,7 @@ class MBIDFinder(ArtistAlbum):
 class TadbMBIDFinder(MBIDFinder):
 
     def find(self):
-        settings.log('  TadbMBIDFinder starting, %s' % self)
+        settings.log('  TadbMBIDFinder starting, %s' % self, xbmc.LOGNOTICE)
         result = MBIDResult()
         if self.artist is not None:
             if self.album is not None:
@@ -152,9 +154,9 @@ class TadbMBIDFinder(MBIDFinder):
                         result.album = bestmatch['strMusicBrainzID']
                     if 'strMusicBrainzArtistID' in bestmatch and utils.is_mbid(bestmatch['strMusicBrainzArtistID']):
                         result.artist = bestmatch['strMusicBrainzArtistID']
-                settings.log('  TheAudioDB result: %s' % result)
+                settings.log('  TheAudioDB result: %s' % result, xbmc.LOGNOTICE)
             except:
-                settings.log('  TheAudioDB result: failed')
+                settings.log('  TheAudioDB result: failed', xbmc.LOGWARNING)
 
         return result
 
@@ -162,7 +164,7 @@ class TadbMBIDFinder(MBIDFinder):
 class MusicbrainzMBIDFinder(MBIDFinder):
 
     def find(self):
-        settings.log('  MusicbrainzMBIDFinder starting, %s' % self)
+        settings.log('  MusicbrainzMBIDFinder starting, %s' % self, xbmc.LOGNOTICE)
         result = MBIDResult()
         if self.album is not None:
             url = constants.MUSICBRAINZ_ALBUM_SERVLET
@@ -185,9 +187,9 @@ class MusicbrainzMBIDFinder(MBIDFinder):
                         settings.log(bestmatch_artist)
                         if 'id' in bestmatch_artist and utils.is_mbid(bestmatch_artist['id']):
                             result.artist = bestmatch_artist['id']
-                settings.log('  Musicbrainz result: artist=%s, album=%s' % (result.artist, result.album))
+                settings.log('  Musicbrainz result: %s' % result, xbmc.LOGNOTICE)
             except:
-                settings.log('  Musicbrainz result: failed')
+                settings.log('  Musicbrainz result: failed', xbmc.LOGWARNING)
 
         elif self.artist is not None:
             if not result.has_any:
@@ -202,9 +204,9 @@ class MusicbrainzMBIDFinder(MBIDFinder):
                         bestmatch = json['artists'][0]
                         if 'id' in bestmatch and utils.is_mbid(bestmatch['id']):
                             result.artist = bestmatch['id']
-                    settings.log('  Musicbrainz result: artist=%s, album=%s' % (result.artist, result.album))
+                    settings.log('  Musicbrainz result: %s' % result, xbmc.LOGNOTICE)
                 except:
-                    settings.log('  Musicbrainz result: failed')
+                    settings.log('  Musicbrainz result: failed', xbmc.LOGWARNING)
 
         return result
 
@@ -215,7 +217,7 @@ class MusicBrainzVA:
 
     def __init__(self):
         if len(MusicBrainzVA.__aliases) == 0:
-            settings.log('Initializing MusicBrainz VA collection')
+            settings.log('Initializing MusicBrainz VA collection', xbmc.LOGNOTICE)
             more_va_list = __settings__.getSettingString('va_aliases')
             for va in more_va_list.split(','):
                 MusicBrainzVA.__aliases.append(utils.smart_unicode(va).upper().lower())
@@ -231,9 +233,9 @@ class MusicBrainzVA:
                         if 'name' in entry:
                             MusicBrainzVA.__aliases.append(entry['name'].upper().lower())
 
-                    settings.log('MusicBrainzVA result: %d aliases' % len(MusicBrainzVA.__aliases))
+                    settings.log('MusicBrainzVA result: %d aliases' % len(MusicBrainzVA.__aliases), xbmc.LOGNOTICE)
             except:
-                settings.log('MusicBrainzVA result: failed')
+                settings.log('MusicBrainzVA result: failed', xbmc.LOGWARNING)
 
             self.__aliases = list(MusicBrainzVA.__aliases)
 
@@ -277,17 +279,18 @@ class RealNameFinder(ArtistAlbum):
     def find(self):
         if self.__class__.__name__ != 'RealNameFinder':
             raise NotImplementedError
-        settings.log('    RealNameFinder starting, %s' % self)
+
+        settings.log('    RealNameFinder starting, %s' % self, xbmc.LOGNOTICE)
         realname_result = RealNameResult()
         if not realname_result.has_any:
-            realname_result = AppleRealNameFinder.from_other(self).find()
+            realname_result = ITunesRealNameFinder.from_other(self).find()
         return realname_result
 
 
-class AppleRealNameFinder(RealNameFinder):
+class ITunesRealNameFinder(RealNameFinder):
 
     def find(self):
-        settings.log('      AppleRealNameFinder starting, %s' % self)
+        settings.log('      ITunesRealNameFinder starting, %s' % self, xbmc.LOGNOTICE)
         result = RealNameResult()
         if self.artist is not None:
             url = constants.APPLE_SERVLET
@@ -298,7 +301,7 @@ class AppleRealNameFinder(RealNameFinder):
                 params.update({'term': self.artist, 'entity': 'musicArtist'})
             try:
                 r = requests.get(url, params, headers={'user-agent': __settings__.getUserAgent()})
-                settings.log(r.url)
+                # settings.log(r.url)
                 json = r.json()
                 if 'resultCount' in json and json['resultCount'] > 0:
                     wrapper_type = json['results'][0]['wrapperType']
@@ -307,8 +310,8 @@ class AppleRealNameFinder(RealNameFinder):
                     if wrapper_type == 'collection':
                         result.artist = json['results'][0]['artistName']
                         result.album = json['results'][0]['collectionName']
-                settings.log('      AppleRealNameFinder result: %s' % result)
+                settings.log('      ITunesRealNameFinder result: %s' % result, xbmc.LOGNOTICE)
             except:
-                settings.log('      AppleRealNameFinder result: failed')
+                settings.log('      ITunesRealNameFinder result: failed', xbmc.LOGWARNING)
 
         return result
