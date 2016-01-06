@@ -79,14 +79,17 @@ class GUI(xbmcgui.WindowXMLDialog):
         if selected == self.DASHBOARD.getLabel2():
             if self.__datastore is None or force:
                 self.__datastore = datastore.Datastore(self.dashboardCallback)
+#                percent = self.__datastore.albums_count_no_mbid()/self.__datastore.albums_count()
+#                self.getControl(9311).setLabel(str(percent))
+#                self.getControl(9321).setLabel(str(self.__datastore.artists_count_no_mbid()/self.__datastore.artists_count()*100))
 
         self.getControl(CONTROLID_TOP_LOADING).setVisible(False)
 
     def dashboardCallback(self, index, albums_len, album_artist, album_title=None):
         if album_title is None:
-            self.getControl(9302).setLabel(str(index))
+            self.getControl(9320).setLabel(str(index))
         else:
-            self.getControl(9301).setLabel(str(index))
+            self.getControl(9310).setLabel(str(index))
 
     def exit(self):
         self.close()

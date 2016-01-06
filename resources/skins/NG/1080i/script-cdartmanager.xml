@@ -185,20 +185,134 @@
 
             <control type="group">
                 <top>90</top>
-                <control type="label" id="9301">
-                    <!-- Albumcount -->
-                    <font>font13</font>
-                    <label>$NUMBER[0]</label>
-                    <textcolor>FF000000</textcolor>
-                </control>
-                <control type="label" id="9302">
-                    <!-- Artistcount -->
-                    <left>100</left>
-                    <font>font13</font>
-                    <label>$NUMBER[0]</label>
-                    <textcolor>FF000000</textcolor>
+
+                <control type="group">
+                    <top>20</top>
+                    <left>40</left>
+                    <width>650</width>
+
+                    <control type="image">
+                        <width>200</width>
+                        <height>120</height>
+                        <texture>textures/solid_white.png</texture>
+                    </control>
+
+                    <control type="image">
+                        <posy>120</posy>
+                        <height>300</height>
+                        <texture>textures/solid_white.png</texture>
+                    </control>
+
+                    <control type="group">
+                        <control type="label" id="9310">
+                            <!-- Albumcount -->
+                            <width>200</width>
+                            <posy>20</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$NUMBER[0]</label>
+                            <textcolor>ffe67333</textcolor>
+                        </control>
+                        <control type="label">
+                            <width>200</width>
+                            <posy>60</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$ADDON[script.cdartmanager-ng 32501]</label><!-- Albums -->
+                            <textcolor>ffe67333</textcolor>
+                        </control>
+                    </control>
+
+                    <control type="group">
+                        <left>220</left>
+                        <control type="label" id="9311">
+                            <!-- Identified Albumcount -->
+                            <width>200</width>
+                            <posy>20</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$NUMBER[0]</label>
+                            <textcolor>ff95a5a6</textcolor>
+                        </control>
+                        <control type="label">
+                            <width>200</width>
+                            <posy>60</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$ADDON[script.cdartmanager-ng 32520]</label><!-- Identified -->
+                            <textcolor>ff95a5a6</textcolor>
+                        </control>
+                    </control>
+
                 </control>
 
+                <control type="group">
+                    <top>20</top>
+                    <right>40</right>
+                    <width>650</width>
+
+                    <control type="image">
+                        <width>200</width>
+                        <height>120</height>
+                        <texture>textures/solid_white.png</texture>
+                    </control>
+
+                    <control type="image">
+                        <posy>120</posy>
+                        <height>300</height>
+                        <texture>textures/solid_white.png</texture>
+                    </control>
+
+                    <control type="label" id="9320">
+                        <!-- Artistscount -->
+                        <width>200</width>
+                        <posy>20</posy>
+                        <align>center</align>
+                        <font>font13</font>
+                        <label>$NUMBER[0]</label>
+                        <textcolor>ffe67333</textcolor>
+                    </control>
+
+                    <control type="label">
+                        <width>200</width>
+                        <posy>60</posy>
+                        <align>center</align>
+                        <font>font13</font>
+                        <label>$ADDON[script.cdartmanager-ng 32502]</label><!-- Artists -->
+                        <textcolor>ffe67333</textcolor>
+                    </control>
+
+                    <control type="group">
+                        <left>220</left>
+                        <control type="label" id="9321">
+                            <!-- Identified Artistcount -->
+                            <width>200</width>
+                            <posy>20</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$NUMBER[0]</label>
+                            <textcolor>ff95a5a6</textcolor>
+                        </control>
+                        <control type="label">
+                            <width>200</width>
+                            <posy>60</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$ADDON[script.cdartmanager-ng 32520]</label><!-- Identified -->
+                            <textcolor>ff95a5a6</textcolor>
+                        </control>
+                    </control>
+                </control>
+
+
+                <control type="label" id="9302">
+                    <visible>false</visible>
+                    <!-- Artistcount -->
+                    <posx>100</posx>
+                    <font>font13</font>
+                    <label>$NUMBER[0]</label>
+                    <textcolor>FF000000</textcolor>
+                </control>
             </control>
 
         </control>

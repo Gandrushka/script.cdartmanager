@@ -28,3 +28,8 @@ msgstr "SETTINGS"
 msgctxt "#32504"
 msgid "EXIT"
 msgstr "EXIT"
+
+msgctxt "#32520"
+msgid "IDENTIFIED"
+msgstr "IDENTIFIED"
+

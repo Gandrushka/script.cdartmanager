@@ -28,3 +28,7 @@ msgstr "EINSTELLUNGEN"
 msgctxt "#32504"
 msgid "EXIT"
 msgstr "BEENDEN"
+
+msgctxt "#32520"
+msgid "IDENTIFIED"
+msgstr "IDENTIFIZIERT"
