@@ -111,47 +111,58 @@
                 <control type="group" id="9200"> <!-- Right -->
                     <left>350</left>
 
+                    <control type="group"> <!-- Bottom -->
+                        <top>190</top>
+                        <control type="image">  <!-- Menu Background -->
+                            <texture>textures/95_lightgray.png</texture>
+                        </control>
+                    </control>
+
+                    <control type="group"> <!-- Middle -->
+                        <top>100</top>
+                        <control type="image">  <!-- Background -->
+                            <height>90</height>
+                            <texture>textures/95_white.png</texture>
+                        </control>
+                        <control type="image">  <!-- Border -->
+                            <top>90</top>
+                            <height>2</height>
+                            <texture>textures/95_mediumgray.png</texture>
+                        </control>
+                    </control>
+
                     <control type="group"> <!-- Top -->
-                        <height>102</height>
+                        <height>100</height>
                         <control type="image">  <!-- Background -->
                             <height>100</height>
                             <texture>textures/95_white.png</texture>
                         </control>
                         <control type="image">  <!-- Border -->
-                            <top>100</top>
+                            <top>98</top>
                             <height>2</height>
-                            <texture>textures/95_lightgray.png</texture>
+                            <texture>textures/95_mediumgray.png</texture>
                         </control>
 
                         <control type="label" id="9201">
                             <font>font13</font>
-                            <left>110</left>
                             <aligny>center</aligny>
                             <align>center</align>
                             <label>Welcome</label>
                             <textcolor>ff27ae60</textcolor>
                         </control>
 
-                    </control>
+                        <!-- loading animation -->
+                        <control type="group" id="9202">
+                            <top>98</top>
+                            <animation type="Conditional" reversible="false" condition="true" pulse="true">
+                                <effect type="zoom" start="5,100" end="100,100" time="1200" center="auto" ease="out"/>
+                            </animation>
+                            <control type="image">
+                                <height>2</height>
+                                <texture>textures/solid_mediumgreen.png</texture>
+                            </control>
+                        </control>
 
-                    <control type="group"> <!-- Middle -->
-                        <top>102</top>
-                        <control type="image">  <!-- Background -->
-                            <height>200</height>
-                            <texture>textures/95_white.png</texture>
-                        </control>
-                        <control type="image">  <!-- Border -->
-                            <top>200</top>
-                            <height>2</height>
-                            <texture>textures/95_mediumgray.png</texture>
-                        </control>
-                    </control>
-
-                    <control type="group"> <!-- Bottom -->
-                        <top>304</top>
-                        <control type="image">  <!-- Menu Background -->
-                            <texture>textures/95_lightgray.png</texture>
-                        </control>
                     </control>
 
                 </control>
@@ -160,6 +171,37 @@
 
         </control>
 
+        <!-- DASHBOARD -->
+        <control type="group" id="9300">
+            <visible>StringCompare(Container(9100).ListItem(0).Label2, "DASHBOARD")</visible>
+            <left>400</left>
+            <top>150</top>
+            <right>50</right>
+            <bottom>50</bottom>
+
+            <control type="group">
+                <height>70</height>
+            </control>
+
+            <control type="group">
+                <top>90</top>
+                <control type="label" id="9301">
+                    <!-- Albumcount -->
+                    <font>font13</font>
+                    <label>$NUMBER[0]</label>
+                    <textcolor>FF000000</textcolor>
+                </control>
+                <control type="label" id="9302">
+                    <!-- Artistcount -->
+                    <left>100</left>
+                    <font>font13</font>
+                    <label>$NUMBER[0]</label>
+                    <textcolor>FF000000</textcolor>
+                </control>
+
+            </control>
+
+        </control>
 
 
     </controls>
