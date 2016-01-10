@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
 
+    <!--
+
+        colors:
+            blue        34495e
+            dark blue   233444
+            green       26ad5e
+            light green 2ecd71
+            gray        95a5a6
+            light gray  d0d5d5
+            dark white  ecf0f1
+    -->
+
+
     <controls>
 
-        <control type="group"> <!-- Main -->
+        <control type="group" id="9000"> <!-- Main -->
             <left>0</left>
             <top>0</top>
             <right>0</right>
             <bottom>0</bottom>
-            <control type="image">  <!-- Background -->
+            <control type="largeimage">  <!-- Background -->
                 <texture>wallpaper.jpg</texture>
                 <aspectratio>scale</aspectratio>
             </control>
@@ -20,12 +33,13 @@
                 <top>40</top>
                 <bottom>40</bottom>
 
-                <control type="group"> <!-- Left -->
+                <control type="group" id="9010"> <!-- Left -->
                     <width>350</width>
-                    <control type="group"> <!-- Logo -->
+                    <!-- Logo -->
+                    <control type="group">
                         <height>100</height>
                         <control type="image">  <!-- Logo Background -->
-                            <texture>textures/95_lightgreen.png</texture>
+                            <texture colordiffuse="ee2ecd71">solid_white.png</texture>
                         </control>
                         <control type="image">  <!-- Logo -->
                             <left>0</left>
@@ -45,16 +59,17 @@
                             <textcolor>ffffffff</textcolor>
                         </control>
                     </control>
-
-                    <control type="group"> <!-- Menu -->
+                    <!-- Menu Wrapper -->
+                    <control type="group">
                         <top>100</top>
                         <bottom>0</bottom>
-                        <control type="image">  <!-- Menu Background -->
-                            <texture>textures/95_blue.png</texture>
+                        <!-- Menu Background -->
+                        <control type="image">
+                            <texture colordiffuse="ee34495e">solid_white.png</texture>
                         </control>
 
-                        <control type="list" id="9100"> <!-- Menu -->
-
+                        <!-- Menu -->
+                        <control type="list" id="9011">
                             <itemlayout height="100">
                                 <control type="image">
                                     <top>20</top>
@@ -75,13 +90,12 @@
                                     <textcolor>ff95a5a6</textcolor>
                                 </control>
                             </itemlayout>
-
                             <focusedlayout height="100">
                                 <control type="image">
                                     <top>10</top>
                                     <width>350</width>
                                     <height>70</height>
-                                    <texture>textures/95_darkblue.png</texture>
+                                    <texture colordiffuse="ee233444">solid_white.png</texture>
                                 </control>
                                 <control type="image">
                                     <top>20</top>
@@ -89,7 +103,7 @@
                                     <width>50</width>
                                     <height>50</height>
                                     <info>Listitem.ActualIcon</info>
-                                    <colordiffuse>0xff26ad5e</colordiffuse>
+                                    <colordiffuse>ff26ad5e</colordiffuse>
                                 </control>
                                 <control type="label">
                                     <top>25</top>
@@ -99,72 +113,74 @@
                                     <font>font13</font>
                                     <align>left</align>
                                     <info>ListItem.Label</info>
+                                    <textcolor>ffffffff</textcolor>
                                 </control>
                             </focusedlayout>
-
                         </control>
-
                     </control>
-
                 </control>
 
-                <control type="group" id="9200"> <!-- Right -->
+                <!-- Right -->
+                <control type="group" id="9020">
                     <left>350</left>
-
                     <control type="group"> <!-- Bottom -->
                         <top>190</top>
-                        <control type="image">  <!-- Menu Background -->
-                            <texture>textures/95_lightgray.png</texture>
+                        <control type="image">  <!-- Background -->
+                            <texture colordiffuse="eeecf0f1">solid_white.png</texture>
                         </control>
                     </control>
-
                     <control type="group"> <!-- Middle -->
                         <top>100</top>
                         <control type="image">  <!-- Background -->
                             <height>90</height>
-                            <texture>textures/95_white.png</texture>
+                            <texture colordiffuse="eeffffff">solid_white.png</texture>
                         </control>
                         <control type="image">  <!-- Border -->
                             <top>90</top>
-                            <height>2</height>
-                            <texture>textures/95_mediumgray.png</texture>
+                            <height>1</height>
+                            <texture colordiffuse="eed0d5d5">solid_white.png</texture>
                         </control>
                     </control>
-
                     <control type="group"> <!-- Top -->
                         <height>100</height>
-                        <control type="image">  <!-- Background -->
+
+                        <!-- Background -->
+                        <control type="image">
                             <height>100</height>
-                            <texture>textures/95_white.png</texture>
-                        </control>
-                        <control type="image">  <!-- Border -->
-                            <top>98</top>
-                            <height>2</height>
-                            <texture>textures/95_mediumgray.png</texture>
+                            <texture colordiffuse="eeffffff">solid_white.png</texture>
                         </control>
 
-                        <control type="label" id="9201">
+                        <!-- Border -->
+                        <control type="image">
+                            <top>100</top>
+                            <height>1</height>
+                            <texture colordiffuse="eed0d5d5">solid_white.png</texture>
+                        </control>
+
+                        <!-- Header -->
+                        <control type="label" id="9021">
                             <font>font13</font>
                             <aligny>center</aligny>
                             <align>center</align>
                             <label>Welcome</label>
-                            <textcolor>ff27ae60</textcolor>
+                            <textcolor>ff26ad5e</textcolor>
                         </control>
 
                         <!-- loading animation -->
-                        <control type="group" id="9202">
+                        <control type="group" id="9022">
                             <top>98</top>
                             <animation type="Conditional" reversible="false" condition="true" pulse="true">
                                 <effect type="zoom" start="5,100" end="100,100" time="1200" center="auto" ease="out"/>
                             </animation>
                             <control type="image">
                                 <height>2</height>
-                                <texture>textures/solid_mediumgreen.png</texture>
+                                <texture colordiffuse="ff26ad5e">solid_white.png</texture>
                             </control>
                         </control>
 
-                    </control>
 
+
+                    </control>
                 </control>
 
             </control>
@@ -172,8 +188,353 @@
         </control>
 
         <!-- DASHBOARD -->
+        <control type="group" id="9100">
+            <visible>StringCompare(Container(9011).ListItem(0).Label2, "DASHBOARD")</visible>
+            <left>400</left>
+            <top>150</top>
+            <right>50</right>
+            <bottom>50</bottom>
+
+            <!-- Menu -->
+            <control type="group">
+                <height>70</height>
+                <control type="group">
+                    <top>10</top>
+                    <left>40</left>
+                    <control type="button" id="9101">
+                        <onleft>9011</onleft>
+                        <ondown>9011</ondown>
+                        <onup>9011</onup>
+                        <width>200</width>
+                        <height>50</height>
+                        <texturefocus colordiffuse="ff2ecd71">solid_white.png</texturefocus>
+                        <texturenofocus colordiffuse="ff26ad5e">solid_white.png</texturenofocus>
+                        <label>$LOCALIZE[335]</label>
+                        <align>center</align>
+                        <font>font13</font>
+                        <textcolor>FFFFFFFF</textcolor>
+                        <focusedcolor>FFFFFFFF</focusedcolor>
+                        <disabledcolor>80FFFFFF</disabledcolor>
+                        <invalidcolor>FFFFFFFF</invalidcolor>
+                    </control>
+                </control>
+            </control>
+
+            <control type="group">
+                <top>90</top>
+
+                <!-- Album Dash -->
+                <control type="group">
+                    <top>20</top>
+                    <left>40</left>
+                    <width>650</width>
+
+                    <!-- Box -->
+                    <control type="group">
+                        <control type="image">
+                            <width>200</width>
+                            <height>80</height>
+                            <texture>solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <posy>80</posy>
+                            <height>300</height>
+                            <texture>solid_white.png</texture>
+                        </control>
+
+                        <control type="image">
+                            <width>200</width>
+                            <height>1</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>200</left>
+                            <width>1</width>
+                            <height>80</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <width>450</width>
+                            <right>0</right>
+                            <top>80</top>
+                            <height>1</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <width>1</width>
+                            <height>380</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <right>0</right>
+                            <top>80</top>
+                            <width>1</width>
+                            <height>300</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <top>380</top>
+                            <height>1</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+
+                    </control>
+
+                    <control type="group">
+                        <control type="label" id="9310">
+                            <!-- Albumcount -->
+                            <width>200</width>
+                            <posy>5</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$NUMBER[0]</label>
+                            <textcolor>ffe67333</textcolor>
+                        </control>
+                        <control type="label">
+                            <width>200</width>
+                            <posy>35</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$LOCALIZE[132]</label><!-- Albums -->
+                            <textcolor>ffe67333</textcolor>
+                        </control>
+                    </control>
+
+                    <control type="group">
+                        <left>220</left>
+                        <control type="label" id="9311">
+                            <!-- Identified Albumcount -->
+                            <width>200</width>
+                            <posy>5</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$NUMBER[0]</label>
+                            <textcolor>ff95a5a6</textcolor>
+                        </control>
+                        <control type="label">
+                            <width>200</width>
+                            <posy>35</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$ADDON[script.cdartmanager-ng 32520]</label><!-- Identified -->
+                            <textcolor>ff95a5a6</textcolor>
+                        </control>
+                    </control>
+
+                </control>
+
+                <!-- Artist Dash -->
+                <control type="group">
+                    <top>20</top>
+                    <right>40</right>
+                    <width>650</width>
+
+                    <!-- Box -->
+                    <control type="group">
+                        <control type="image">
+                            <width>200</width>
+                            <height>80</height>
+                            <texture>solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <posy>80</posy>
+                            <height>300</height>
+                            <texture>solid_white.png</texture>
+                        </control>
+
+                        <control type="image">
+                            <width>200</width>
+                            <height>1</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>200</left>
+                            <width>1</width>
+                            <height>80</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <width>450</width>
+                            <right>0</right>
+                            <top>80</top>
+                            <height>1</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <width>1</width>
+                            <height>380</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <right>0</right>
+                            <top>80</top>
+                            <width>1</width>
+                            <height>300</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <top>380</top>
+                            <height>1</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+
+                    </control>
+
+                    <control type="group">
+                        <control type="label" id="9320">
+                            <!-- Artistscount -->
+                            <width>200</width>
+                            <posy>5</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$NUMBER[0]</label>
+                            <textcolor>ff1abc9c</textcolor>
+                        </control>
+
+                        <control type="label">
+                            <width>200</width>
+                            <posy>35</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$LOCALIZE[133]</label><!-- Artists -->
+                            <textcolor>ff1abc9c</textcolor>
+                        </control>
+                    </control>
+
+                    <control type="group">
+                        <left>220</left>
+                        <control type="label" id="9321">
+                            <!-- Identified Artistcount -->
+                            <width>200</width>
+                            <posy>5</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$NUMBER[0]</label>
+                            <textcolor>ff95a5a6</textcolor>
+                        </control>
+                        <control type="label">
+                            <width>200</width>
+                            <posy>35</posy>
+                            <align>center</align>
+                            <font>font13</font>
+                            <label>$ADDON[script.cdartmanager-ng 32520]</label><!-- Identified -->
+                            <textcolor>ff95a5a6</textcolor>
+                        </control>
+                    </control>
+                </control>
+
+                <!-- Activity Dash -->
+                <control type="group">
+                    <top>440</top>
+                    <left>40</left>
+                    <right>40</right>
+                    <bottom>20</bottom>
+
+                    <control type="group">
+                        <control type="image">
+                            <texture>solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <height>1</height>
+                            <texture colordiffuse="ffd0d5d5">solid_white.png</texture>
+                        </control>
+
+                        <control type="image">
+                            <height>1</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <width>1</width>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <right>0</right>
+                            <width>1</width>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <bottom>0</bottom>
+                            <height>1</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+
+                        <control type="label">
+                            <posx>20</posx>
+                            <height>50</height>
+                            <aligny>center</aligny>
+                            <font>font13</font>
+                            <label>$ADDON[script.cdartmanager-ng 32510]</label><!-- Activity -->
+                            <textcolor>ff95a5a6</textcolor>
+                        </control>
+
+                    </control>
+                </control>
+
+            </control>
+
+        </control>
+
+        <!-- ALBUMS -->
+        <control type="group" id="9200">
+            <visible>StringCompare(Container(9011).ListItem(0).Label2, "ALBUMS")</visible>
+            <left>400</left>
+            <top>150</top>
+            <right>50</right>
+            <bottom>50</bottom>
+
+            <!-- Menu -->
+            <control type="group">
+                <height>70</height>
+                <control type="group">
+                    <top>10</top>
+                    <left>40</left>
+                    <control type="button" id="9201">
+                        <onleft>9011</onleft>
+                        <onright>9202</onright>
+                        <ondown>9011</ondown>
+                        <onup>9011</onup>
+                        <width>200</width>
+                        <height>50</height>
+                        <texturefocus colordiffuse="ff2ecd71">solid_white.png</texturefocus>
+                        <texturenofocus colordiffuse="ff26ad5e">solid_white.png</texturenofocus>
+                        <label>Hello World</label>
+                        <align>center</align>
+                        <font>font13</font>
+                        <textcolor>FFFFFFFF</textcolor>
+                        <focusedcolor>FFFFFFFF</focusedcolor>
+                        <disabledcolor>80FFFFFF</disabledcolor>
+                        <invalidcolor>FFFFFFFF</invalidcolor>
+                    </control>
+                    <control type="button" id="9202">
+                        <left>220</left>
+                        <onleft>9201</onleft>
+                        <ondown>9011</ondown>
+                        <onup>9011</onup>
+                        <width>200</width>
+                        <height>50</height>
+                        <texturefocus colordiffuse="ff2ecd71">solid_white.png</texturefocus>
+                        <texturenofocus colordiffuse="ff26ad5e">solid_white.png</texturenofocus>
+                        <label>Hello World</label>
+                        <align>center</align>
+                        <font>font13</font>
+                        <textcolor>FFFFFFFF</textcolor>
+                        <focusedcolor>FFFFFFFF</focusedcolor>
+                        <disabledcolor>80FFFFFF</disabledcolor>
+                        <invalidcolor>FFFFFFFF</invalidcolor>
+                    </control>
+                </control>
+            </control>
+
+            <control type="group">
+                <top>90</top>
+            </control>
+
+        </control>
+
+        <!-- ARTISTS -->
         <control type="group" id="9300">
-            <visible>StringCompare(Container(9100).ListItem(0).Label2, "DASHBOARD")</visible>
+            <visible>StringCompare(Container(9011).ListItem(0).Label2, "ARTISTS")</visible>
             <left>400</left>
             <top>150</top>
             <right>50</right>
@@ -185,138 +546,45 @@
 
             <control type="group">
                 <top>90</top>
-
-                <control type="group">
-                    <top>20</top>
-                    <left>40</left>
-                    <width>650</width>
-
-                    <control type="image">
-                        <width>200</width>
-                        <height>120</height>
-                        <texture>textures/solid_white.png</texture>
-                    </control>
-
-                    <control type="image">
-                        <posy>120</posy>
-                        <height>300</height>
-                        <texture>textures/solid_white.png</texture>
-                    </control>
-
-                    <control type="group">
-                        <control type="label" id="9310">
-                            <!-- Albumcount -->
-                            <width>200</width>
-                            <posy>20</posy>
-                            <align>center</align>
-                            <font>font13</font>
-                            <label>$NUMBER[0]</label>
-                            <textcolor>ffe67333</textcolor>
-                        </control>
-                        <control type="label">
-                            <width>200</width>
-                            <posy>60</posy>
-                            <align>center</align>
-                            <font>font13</font>
-                            <label>$ADDON[script.cdartmanager-ng 32501]</label><!-- Albums -->
-                            <textcolor>ffe67333</textcolor>
-                        </control>
-                    </control>
-
-                    <control type="group">
-                        <left>220</left>
-                        <control type="label" id="9311">
-                            <!-- Identified Albumcount -->
-                            <width>200</width>
-                            <posy>20</posy>
-                            <align>center</align>
-                            <font>font13</font>
-                            <label>$NUMBER[0]</label>
-                            <textcolor>ff95a5a6</textcolor>
-                        </control>
-                        <control type="label">
-                            <width>200</width>
-                            <posy>60</posy>
-                            <align>center</align>
-                            <font>font13</font>
-                            <label>$ADDON[script.cdartmanager-ng 32520]</label><!-- Identified -->
-                            <textcolor>ff95a5a6</textcolor>
-                        </control>
-                    </control>
-
-                </control>
-
-                <control type="group">
-                    <top>20</top>
-                    <right>40</right>
-                    <width>650</width>
-
-                    <control type="image">
-                        <width>200</width>
-                        <height>120</height>
-                        <texture>textures/solid_white.png</texture>
-                    </control>
-
-                    <control type="image">
-                        <posy>120</posy>
-                        <height>300</height>
-                        <texture>textures/solid_white.png</texture>
-                    </control>
-
-                    <control type="label" id="9320">
-                        <!-- Artistscount -->
-                        <width>200</width>
-                        <posy>20</posy>
-                        <align>center</align>
-                        <font>font13</font>
-                        <label>$NUMBER[0]</label>
-                        <textcolor>ffe67333</textcolor>
-                    </control>
-
-                    <control type="label">
-                        <width>200</width>
-                        <posy>60</posy>
-                        <align>center</align>
-                        <font>font13</font>
-                        <label>$ADDON[script.cdartmanager-ng 32502]</label><!-- Artists -->
-                        <textcolor>ffe67333</textcolor>
-                    </control>
-
-                    <control type="group">
-                        <left>220</left>
-                        <control type="label" id="9321">
-                            <!-- Identified Artistcount -->
-                            <width>200</width>
-                            <posy>20</posy>
-                            <align>center</align>
-                            <font>font13</font>
-                            <label>$NUMBER[0]</label>
-                            <textcolor>ff95a5a6</textcolor>
-                        </control>
-                        <control type="label">
-                            <width>200</width>
-                            <posy>60</posy>
-                            <align>center</align>
-                            <font>font13</font>
-                            <label>$ADDON[script.cdartmanager-ng 32520]</label><!-- Identified -->
-                            <textcolor>ff95a5a6</textcolor>
-                        </control>
-                    </control>
-                </control>
-
-
-                <control type="label" id="9302">
-                    <visible>false</visible>
-                    <!-- Artistcount -->
-                    <posx>100</posx>
-                    <font>font13</font>
-                    <label>$NUMBER[0]</label>
-                    <textcolor>FF000000</textcolor>
-                </control>
             </control>
 
         </control>
 
+        <!-- SETTINGS -->
+        <control type="group" id="9400">
+            <visible>StringCompare(Container(9011).ListItem(0).Label2, "SETTINGS")</visible>
+            <left>400</left>
+            <top>150</top>
+            <right>50</right>
+            <bottom>50</bottom>
+
+            <control type="group">
+                <height>70</height>
+            </control>
+
+            <control type="group">
+                <top>90</top>
+            </control>
+
+        </control>
+
+        <!-- EXIT -->
+        <control type="group" id="9500">
+            <visible>StringCompare(Container(9011).ListItem(0).Label2, "EXIT")</visible>
+            <left>400</left>
+            <top>150</top>
+            <right>50</right>
+            <bottom>50</bottom>
+
+            <control type="group">
+                <height>70</height>
+            </control>
+
+            <control type="group">
+                <top>90</top>
+            </control>
+
+        </control>
 
     </controls>
 

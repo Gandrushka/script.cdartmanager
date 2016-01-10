@@ -8,7 +8,7 @@ import utils
 __settings__ = settings.Settings()
 
 
-class ArtistAlbum:
+class ArtistAlbum(object):
 
     def __init__(self, artist=None, album=None):
         self.__artist = artist
@@ -84,6 +84,16 @@ class ArtistAlbum:
 
 class MBIDResult(ArtistAlbum):
 
+    def __init__(self, artist=None, album=None):
+        super(self.__class__, self).__init__(artist, album)
+        self.__confidence = None
+
+    def __str__(self):
+        artist = self.artist
+        if self.is_va:
+            artist = '[VA]'
+        return 'artist=%s, album=%s' % (artist, self.album)
+
     @property
     def has_artist(self):
         return utils.is_mbid(self.artist)
@@ -91,6 +101,14 @@ class MBIDResult(ArtistAlbum):
     @property
     def has_album(self):
         return utils.is_mbid(self.album)
+
+    @property
+    def confidence(self):
+        return self.__confidence
+
+    @confidence.setter
+    def confidence(self, value):
+        self.__confidence = value
 
 
 class RealNameResult(ArtistAlbum):
@@ -157,6 +175,9 @@ class TadbMBIDFinder(MBIDFinder):
                 settings.log('  TheAudioDB result: %s' % result, xbmc.LOGNOTICE)
             except:
                 settings.log('  TheAudioDB result: failed', xbmc.LOGWARNING)
+
+        if result.has_any:
+            result.confidence = "TADB"
 
         return result
 

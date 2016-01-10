@@ -43,7 +43,10 @@ def get_albums():
     json_query = '{"jsonrpc": "2.0", "method": "AudioLibrary.GetAlbums", "params": { "limits": { "start": 0 }, ' \
                  '"properties": ["title", "artist", "artistid", "musicbrainzalbumid", "musicbrainzalbumartistid"], "sort": {"order":"ascending"}}, "id": 1}'
     json_albums = _retrieve_json_dict(json_query, items='albums', force_log=False)
+
     if json_albums:
+        # here the path should be added...
+
         return json_albums
     else:
         return []

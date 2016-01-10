@@ -5,8 +5,11 @@ import settings
 __settings__ = settings.Settings()
 
 
-def lang(id_):
-    return __settings__.getAddon().getLocalizedString(id_)
+def lang(id_, addon=True):
+    if addon:
+        return __settings__.getAddon().getLocalizedString(id_)
+    else:
+        return xbmc.getLocalizedString(id_)
 
 
 def yesno_dialog(heading, line1='', line2='', line3='',):

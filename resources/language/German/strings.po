@@ -10,25 +10,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgctxt "#32500"
-msgid "DASHBOARD"
-msgstr "DASHBOARD"
+msgid "Dashboard"
+msgstr ""
 
-msgctxt "#32501"
-msgid "ALBUMS"
-msgstr "ALBEN"
-
-msgctxt "#32502"
-msgid "ARTISTS"
-msgstr "INTERPRETEN"
-
-msgctxt "#32503"
-msgid "SETTINGS"
-msgstr "EINSTELLUNGEN"
-
-msgctxt "#32504"
-msgid "EXIT"
-msgstr "BEENDEN"
+msgctxt "#32510"
+msgid "Activity"
+msgstr "Aktivität"
 
 msgctxt "#32520"
-msgid "IDENTIFIED"
-msgstr "IDENTIFIZIERT"
+msgid "Identified"
+msgstr "Identifiziert"
