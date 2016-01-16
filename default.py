@@ -12,8 +12,6 @@ if __name__ == "__main__":
 
     try:
 
-        xbmc.executebuiltin('Dialog.Close(all, true)')
-
         # log startup
         settings.log(constants.LOG_STARTUP_BORDER, xbmc.LOGNOTICE)
         settings.log(constants.LOG_STARTUP_LINE % (__settings__.getName() + " (" + __settings__.getId() + ")"), xbmc.LOGNOTICE)
@@ -29,7 +27,6 @@ if __name__ == "__main__":
         __settings__.reload(True)
         __settings__.to_log()
 
-        xbmc.executebuiltin('Dialog.Close(all, true)')
         ui = gui.GUI("script-cdartmanager.xml", __settings__.getPath(), constants.SKIN_FOLDER)
         xbmc.sleep(500)
         ui.doModal()
