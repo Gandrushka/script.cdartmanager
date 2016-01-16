@@ -49,6 +49,14 @@ class GUI(xbmcgui.WindowXMLDialog):
             if main_action == "EXIT":
                 self.exit()
 
+        if control_id == 9101:
+            self.getControl(CONTROLID_TOP_LOADING).setVisible(True)
+            self.getControl(9311).setLabel("...")
+            self.getControl(9321).setLabel("...")
+            self.__datastore.update_datastore("all", self.dashboardCallback)
+            self.updateMainSelection(True)
+            self.getControl(CONTROLID_TOP_LOADING).setVisible(False)
+
     def onControl(self, control_id):
         pass
 
@@ -94,8 +102,10 @@ class GUI(xbmcgui.WindowXMLDialog):
                 self.__datastore = datastore.Datastore(self.dashboardCallback)
                 percent = (100 * (self.__datastore.albums_count() - self.__datastore.albums_count_no_mbid()) / self.__datastore.albums_count())
                 self.getControl(9311).setLabel("%s%%" % percent)
+                self.getControl(9311).setVisible(True)
                 percent = (100 * (self.__datastore.artists_count() - self.__datastore.artists_count_no_mbid()) / self.__datastore.artists_count())
                 self.getControl(9321).setLabel("%s%%" % percent)
+                self.getControl(9321).setVisible(True)
 
         self.getControl(CONTROLID_TOP_LOADING).setVisible(False)
 
@@ -104,6 +114,7 @@ class GUI(xbmcgui.WindowXMLDialog):
             self.getControl(9320).setLabel(str(index))
         else:
             self.getControl(9310).setLabel(str(index))
+        return False  # Cancelled
 
     def exit(self):
         self.close()

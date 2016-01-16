@@ -228,6 +228,7 @@
                     <top>20</top>
                     <left>40</left>
                     <width>650</width>
+                    <height>380</height>
 
                     <!-- Box -->
                     <control type="group">
@@ -248,32 +249,32 @@
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
                         <control type="image">
-                            <left>200</left>
+                            <width>1</width>
+                            <height>380</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <posx>200</posx>
                             <width>1</width>
                             <height>80</height>
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
                         <control type="image">
                             <width>450</width>
-                            <right>0</right>
+                            <posx>200</posx>
                             <top>80</top>
                             <height>1</height>
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
                         <control type="image">
-                            <width>1</width>
-                            <height>380</height>
-                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
-                        </control>
-                        <control type="image">
-                            <right>0</right>
+                            <posx>0r</posx>
                             <top>80</top>
                             <width>1</width>
                             <height>300</height>
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
                         <control type="image">
-                            <top>380</top>
+                            <posy>0r</posy>
                             <height>1</height>
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
@@ -328,6 +329,7 @@
                     <top>20</top>
                     <right>40</right>
                     <width>650</width>
+                    <height>380</height>
 
                     <!-- Box -->
                     <control type="group">
@@ -348,32 +350,32 @@
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
                         <control type="image">
-                            <left>200</left>
+                            <width>1</width>
+                            <height>380</height>
+                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
+                        </control>
+                        <control type="image">
+                            <posx>200</posx>
                             <width>1</width>
                             <height>80</height>
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
                         <control type="image">
                             <width>450</width>
-                            <right>0</right>
+                            <posx>200</posx>
                             <top>80</top>
                             <height>1</height>
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
                         <control type="image">
-                            <width>1</width>
-                            <height>380</height>
-                            <texture colordiffuse="ff95a5a6">solid_white.png</texture>
-                        </control>
-                        <control type="image">
-                            <right>0</right>
+                            <posx>0r</posx>
                             <top>80</top>
                             <width>1</width>
                             <height>300</height>
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
                         <control type="image">
-                            <top>380</top>
+                            <posy>0r</posy>
                             <height>1</height>
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
@@ -449,12 +451,12 @@
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
                         <control type="image">
-                            <right>0</right>
+                            <posx>0r</posx>
                             <width>1</width>
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
                         <control type="image">
-                            <bottom>0</bottom>
+                            <posy>0r</posy>
                             <height>1</height>
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
