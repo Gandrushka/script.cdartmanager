@@ -1,4 +1,5 @@
 import xbmc
+import os
 import settings
 
 
@@ -45,8 +46,18 @@ def get_albums():
     json_albums = _retrieve_json_dict(json_query, items='albums', force_log=False)
 
     if json_albums:
-        # here the path should be added...
-
         return json_albums
     else:
         return []
+
+
+def get_albumpaths(album_id):
+    json_query = '{"jsonrpc": "2.0", "method": "AudioLibrary.GetSongs", "params": { "properties": ["file"], ' \
+                 '"filter": { "albumid": %d } }, "id": 1}' % album_id
+    json_songs_detail = _retrieve_json_dict(json_query, items='songs', force_log=False)
+    paths = set()
+    for song in json_songs_detail:
+        if 'file' in song:
+            path = os.path.dirname(song['file'])
+            paths.add(path)
+    return list(paths)

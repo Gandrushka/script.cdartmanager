@@ -312,7 +312,7 @@
                             <label>$NUMBER[0]</label>
                             <textcolor>ff95a5a6</textcolor>
                         </control>
-                        <control type="label">
+                        <control type="label" id="9312">
                             <width>200</width>
                             <posy>35</posy>
                             <align>center</align>
@@ -414,7 +414,7 @@
                             <label>$NUMBER[0]</label>
                             <textcolor>ff95a5a6</textcolor>
                         </control>
-                        <control type="label">
+                        <control type="label" id="9322">
                             <width>200</width>
                             <posy>35</posy>
                             <align>center</align>

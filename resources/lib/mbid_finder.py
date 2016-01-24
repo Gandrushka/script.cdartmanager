@@ -84,9 +84,9 @@ class ArtistAlbum(object):
 
 class MBIDResult(ArtistAlbum):
 
-    def __init__(self, artist=None, album=None):
+    def __init__(self, artist=None, album=None, source=None):
         super(self.__class__, self).__init__(artist, album)
-        self.__confidence = None
+        self.__source = source
 
     def __str__(self):
         artist = self.artist
@@ -103,12 +103,12 @@ class MBIDResult(ArtistAlbum):
         return utils.is_mbid(self.album)
 
     @property
-    def confidence(self):
-        return self.__confidence
+    def source(self):
+        return self.__source
 
-    @confidence.setter
-    def confidence(self, value):
-        self.__confidence = value
+    # @source.setter
+    # def source(self, value):
+    #     self.__source = value
 
 
 class RealNameResult(ArtistAlbum):
@@ -151,7 +151,7 @@ class TadbMBIDFinder(MBIDFinder):
 
     def find(self):
         settings.log('  TadbMBIDFinder starting, %s' % self, xbmc.LOGNOTICE)
-        result = MBIDResult()
+        result = MBIDResult(source="TADB")
         if self.artist is not None:
             if self.album is not None:
                 url = constants.TADB_ALBUM_SERVLET
@@ -186,7 +186,7 @@ class MusicbrainzMBIDFinder(MBIDFinder):
 
     def find(self):
         settings.log('  MusicbrainzMBIDFinder starting, %s' % self, xbmc.LOGNOTICE)
-        result = MBIDResult()
+        result = MBIDResult(source="MB")
         if self.album is not None:
             url = constants.MUSICBRAINZ_ALBUM_SERVLET
             params = dict(constants.MUSICBRAINZ_DEFAULT_PARAMS)

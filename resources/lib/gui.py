@@ -51,9 +51,10 @@ class GUI(xbmcgui.WindowXMLDialog):
 
         if control_id == 9101:
             self.getControl(CONTROLID_TOP_LOADING).setVisible(True)
-            self.getControl(9311).setLabel("...")
-            self.getControl(9321).setLabel("...")
-            self.__datastore.update_datastore("all", self.dashboardCallback)
+            self.getControl(9311).setVisible(False)
+            self.getControl(9321).setVisible(False)
+            self.__datastore.update_datastore("albums", self.dashboardCallback)
+            self.__datastore.update_datastore("artists", self.dashboardCallback)
             self.updateMainSelection(True)
             self.getControl(CONTROLID_TOP_LOADING).setVisible(False)
 
@@ -62,7 +63,7 @@ class GUI(xbmcgui.WindowXMLDialog):
 
     def onAction(self, action):
 
-        settings.log("Action: %s" % action)
+        # settings.log("Action: %s" % action)
 
         if self.getFocusId() == 0:
             self.setFocusId(CONTROLID_MAIN_MENU)
@@ -101,6 +102,7 @@ class GUI(xbmcgui.WindowXMLDialog):
             if self.__datastore is None or force:
                 self.__datastore = datastore.Datastore(self.dashboardCallback)
                 percent = (100 * (self.__datastore.albums_count() - self.__datastore.albums_count_no_mbid()) / self.__datastore.albums_count())
+                settings.log("P: %s %s" % (self.__datastore.albums_count(), self.__datastore.albums_count_no_mbid()))
                 self.getControl(9311).setLabel("%s%%" % percent)
                 self.getControl(9311).setVisible(True)
                 percent = (100 * (self.__datastore.artists_count() - self.__datastore.artists_count_no_mbid()) / self.__datastore.artists_count())
@@ -109,11 +111,16 @@ class GUI(xbmcgui.WindowXMLDialog):
 
         self.getControl(CONTROLID_TOP_LOADING).setVisible(False)
 
-    def dashboardCallback(self, index, albums_len, album_artist, album_title=None):
+    def dashboardCallback(self, index, size, artist, album_title=None):
         if album_title is None:
-            self.getControl(9320).setLabel(str(index))
+            control = self.getControl(9320)
         else:
-            self.getControl(9310).setLabel(str(index))
+            control = self.getControl(9310)
+
+        if index == (size-1):
+            control.setLabel("%s" % size)
+        else:
+            control.setLabel("%s / %s" % (index, size))
         return False  # Cancelled
 
     def exit(self):

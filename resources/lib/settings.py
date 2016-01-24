@@ -144,6 +144,9 @@ class Settings:
     def getDatabaseFileUpdate(self):
         return self.getWorkFile(constants.DB_FILENAME_UPDATE)
 
+    def isDevMode(self):
+        return xbmcvfs.exists(self.getWorkFile("DEVMODE"))
+
     def to_log(self):
         level = xbmc.LOGNOTICE
         try:

@@ -50,6 +50,19 @@ def is_mbid(mbid):
     return mbid is not None and len(mbid) == 36 and len(mbid.replace("-", "")) == 32
 
 
+def extract_mbid(data, identifier=None):
+    if identifier is None:
+        if is_mbid(data):
+            return data
+        else:
+            return None
+    else:
+        if data is not None and identifier in data and is_mbid(data[identifier]):
+            return data[identifier]
+        else:
+            return None
+
+
 def sanitize_fs(text, force=False):
 
     if force or __settings__.getSettingBool("enable_replace_illegal"):
