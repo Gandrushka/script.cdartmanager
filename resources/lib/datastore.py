@@ -29,6 +29,8 @@ class Datastore:
 
     def update_datastore(self, retrieve_missing=None, callback=None):
 
+
+
         # auto migration
         auto_migrate = False
 
@@ -40,16 +42,16 @@ class Datastore:
         self.__addon_albums = self.load_addon_dict(constants.DS_ALBUMS_FILE)
         self.__addon_artists = self.load_addon_dict(constants.DS_ARTISTS_FILE)
 
-        dev_mode = __settings__.isDevMode()
-
-        # on first run we migrate data fro mthe legacy db...
-        first_run = self.artists_count() == 0 and self.albums_count() == 0
+        # on first run we migrate data from the legacy db...
+        #if self.artists_count() == 0 and self.albums_count() == 0:
+        #    self.__legacy_db = migrate.LegacyDB()
+        self.__legacy_db = migrate.LegacyDB()
 
         check_artists_online = retrieve_missing in ("artists", "all")
         artists_len = self.artists_count()
         for index, artist in enumerate(self.__artists):
 
-            if check_artists_online and dev_mode:
+            if check_artists_online and __settings__.isDevMode():
                 check_artists_online = index < 20
 
             if 'artistid' in artist:
@@ -67,7 +69,7 @@ class Datastore:
         albums_len = self.albums_count()
         for index, album in enumerate(self.__albums):
 
-            if check_albums_online and dev_mode:
+            if check_albums_online and __settings__.isDevMode():
                 check_albums_online = index < 20
 
             if 'albumid' in album:
@@ -193,6 +195,12 @@ class Datastore:
             artist = kodi_entry['artist']
             addon_entry['artist'] = artist
 
+            if self.__legacy_db is not None:
+                legacy_mbid = utils.extract_mbid(self.__legacy_db.artists, kodi_entry['artistid'])
+                if legacy_mbid is not None:
+                    addon_entry['mbid'] = legacy_mbid
+                    addon_entry['mbid_source'] = self.SOURCE_LEGACY
+
             mbid = utils.extract_mbid(addon_entry, 'mbid')
             if mbid is None:
                 mbid = utils.extract_mbid(kodi_entry, 'musicbrainzartistid')
@@ -217,6 +225,12 @@ class Datastore:
 
             addon_entry['paths'] = kodi_rpc.get_albumpaths(kodi_entry['albumid'])
             kodi_entry['paths'] = addon_entry['paths']
+
+            if self.__legacy_db is not None:
+                legacy_mbid = utils.extract_mbid(self.__legacy_db.albums, kodi_entry['albumid'])
+                if legacy_mbid is not None:
+                    addon_entry['mbid'] = legacy_mbid
+                    addon_entry['mbid_source'] = self.SOURCE_LEGACY
 
             mbid = utils.extract_mbid(addon_entry, 'mbid')
             if mbid is None:

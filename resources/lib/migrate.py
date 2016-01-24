@@ -13,14 +13,13 @@ LEGACY_DB_FILE = 'l_cdart.db'
 LEGACY_STATUS_FILE = '.legacy_data_migrated'
 
 
-# @TODO: import once or use as mbid source?
 class LegacyDB:
 
     def __init__(self):
 
         self.legacy_db = None
         # legacy addon still installed?
-        settings.log("Migration: checking, you can safely ignore 'Unknown addon' errors...")
+        settings.log("Migration: checking, you can safely ignore 'Unknown addon' errors...", xbmc.LOGWARNING)
         try:
             self.legacy_db = xbmc.translatePath(os.path.join(xbmcaddon.Addon(id=LEGACY_ADDON_ID).getAddonInfo("profile"), LEGACY_DB_FILE))
         except RuntimeError:
@@ -36,22 +35,24 @@ class LegacyDB:
             settings.log("Migration: LegacyDB not found.")
         else:
             settings.log("Migration: LegacyDB found.")
+            self.artists = self.__get_artists()
+            self.albums = self.__get_albums()
 
-    def get_db(self):
+    def __get_db(self):
         return self.legacy_db
 
-    def get_artists(self):
-        if self.get_db():
-            result = []
+    def __get_artists(self):
+        if self.__get_db() is not None:
+            result = {}
             conn = None
             try:
-                conn = sqlite3.connect(self.get_db())
+                conn = sqlite3.connect(self.__get_db())
                 c = conn.cursor()
-                c.execute("select distinct name, musicbrainz_artistid from lalist union select distinct name, musicbrainz_artistid from local_artists order by name")
+                c.execute("select distinct local_id, musicbrainz_artistid from lalist union select distinct local_id, musicbrainz_artistid from local_artists order by local_id")
                 data = c.fetchall()
                 c.close()
                 for item in data:
-                    result.append({"artist": item[0], "artist_mbid": item[1]})
+                    result[item[0]] = item[1]
             except RuntimeError as e:
                 settings.log(e, xbmc.LOGWARNING)
             finally:
@@ -61,18 +62,18 @@ class LegacyDB:
         else:
             return None
 
-    def get_albums(self):
-        if self.get_db():
-            result = []
+    def __get_albums(self):
+        if self.__get_db() is not None:
+            result = {}
             conn = None
             try:
-                conn = sqlite3.connect(self.get_db())
+                conn = sqlite3.connect(self.__get_db())
                 c = conn.cursor()
-                c.execute("select distinct artist, musicbrainz_artistid, title, musicbrainz_albumid from alblist")
+                c.execute("select distinct album_id, musicbrainz_albumid from alblist")
                 data = c.fetchall()
                 c.close()
                 for item in data:
-                    result.append({"artist": item[0], "artist_mbid": item[1], "album": item[2], "album_mbid": item[3]})
+                    result[item[0]] = item[1]
             except RuntimeError as e:
                 settings.log(e, xbmc.LOGWARNING)
             finally:
