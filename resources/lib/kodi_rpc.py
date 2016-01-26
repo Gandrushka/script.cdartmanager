@@ -1,6 +1,7 @@
 import xbmc
 import os
 import settings
+import json
 
 
 def _retrieve_json_dict(json_query, items='items', force_log=False):
@@ -10,7 +11,7 @@ def _retrieve_json_dict(json_query, items='items', force_log=False):
     if force_log:
         settings.log("retrieve_json_dict - JSONRPC -\n%s" % response)
     if response.startswith("{"):
-        response = eval(response)
+        response = json.loads(response)
         try:
             if "result" in response:
                 result = response['result']
@@ -34,9 +35,12 @@ def get_artists(album_artists_only=True):
                  '"sort":{ "order": "ascending", "method": "label", "ignorearticle": true }}, "id": 1}' % str(album_artists_only).lower()
     json_artists = _retrieve_json_dict(json_query, items='artists', force_log=False)
     if json_artists:
-        return json_artists
+        result = {}
+        for artist in json_artists:
+            result[artist['artistid']] = artist
+        return result
     else:
-        return []
+        return {}
 
 
 def get_albums():
@@ -46,9 +50,12 @@ def get_albums():
     json_albums = _retrieve_json_dict(json_query, items='albums', force_log=False)
 
     if json_albums:
-        return json_albums
+        result = {}
+        for album in json_albums:
+            result[album['albumid']] = album
+        return result
     else:
-        return []
+        return {}
 
 
 def get_albumpaths(album_id):

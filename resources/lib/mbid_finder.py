@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import time
 import requests
 import xbmc
@@ -11,8 +13,8 @@ __settings__ = settings.Settings()
 class ArtistAlbum(object):
 
     def __init__(self, artist=None, album=None):
-        self.__artist = artist
-        self.__album = album
+        self.__artist = utils.smart_unicode(artist)
+        self.__album = utils.smart_unicode(album)
 
     def __str__(self):
         artist = self.artist
@@ -106,10 +108,6 @@ class MBIDResult(ArtistAlbum):
     def source(self):
         return self.__source
 
-    # @source.setter
-    # def source(self, value):
-    #     self.__source = value
-
 
 class RealNameResult(ArtistAlbum):
     pass
@@ -123,6 +121,10 @@ class MBIDFinder(ArtistAlbum):
 
         mbid_result = MBIDResult()
         settings.log('MBIDFinder starting, %s' % self, xbmc.LOGNOTICE)
+
+ #       if not self.album.startswith(u"Café"):
+ #           settings.log('MBIDFinder skipping...', xbmc.LOGNOTICE)
+ #           return mbid_result
 
         mb_va = MusicBrainzVA()
         if mb_va.is_va(self.artist):

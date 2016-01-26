@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import traceback
 import xbmc
 import xbmcgui
 import settings
@@ -17,6 +18,7 @@ CONTROLID_TOP_LABEL = 9021
 CONTROLID_TOP_LOADING = 9022
 
 CONTROLID_ACTION_BASE = 9100
+
 
 
 class GUI(xbmcgui.WindowXMLDialog):
@@ -53,9 +55,7 @@ class GUI(xbmcgui.WindowXMLDialog):
             self.getControl(CONTROLID_TOP_LOADING).setVisible(True)
             self.getControl(9311).setVisible(False)
             self.getControl(9321).setVisible(False)
-            self.__datastore.update_datastore("albums", self.dashboardCallback)
-            self.__datastore.update_datastore("artists", self.dashboardCallback)
-            self.updateMainSelection(True)
+            self.__datastore.update_datastore("all", self.dashboardCallback)
             self.getControl(CONTROLID_TOP_LOADING).setVisible(False)
 
     def onControl(self, control_id):
@@ -85,11 +85,15 @@ class GUI(xbmcgui.WindowXMLDialog):
                 try:
                     self.__dash_active = self.getControl(CONTROLID_ACTION_BASE + (self.__main_menu.getSelectedPosition()*100))
                     self.__main_menu.controlRight(self.__dash_active)
-                except:
+                except SystemError:
+                    settings.log("InnerException in setMainSelected")
+                    traceback.print_exc()
                     self.__dash_active = None
                     self.__main_menu.con.controlRight(None)
                 self.updateMainSelection()
-        except:
+        except SystemError:
+            settings.log("OuterException in setMainSelected")
+            traceback.print_exc()
             pass
 
     def updateMainSelection(self, force=False):
