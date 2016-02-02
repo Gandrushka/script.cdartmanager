@@ -1,7 +1,10 @@
 import xbmc
+import xbmcvfs
 import os
 import settings
 import json
+import constants
+import utils
 
 
 def _retrieve_json_dict(json_query, items='items', force_log=False):
@@ -67,4 +70,38 @@ def get_albumpaths(album_id):
         if 'file' in song:
             path = os.path.dirname(song['file'])
             paths.add(path)
-    return list(paths)
+    album_paths = list()
+    for path in paths:
+        album_paths.append(AlbumPath(path))
+    return album_paths
+
+
+class AlbumPath:
+
+    def __init__(self, path, *args, **kwargs):
+        self.__path = path
+        self.__cover_file = os.path.join(path, constants.ART_FILENAME_ALBUM_COVER)
+        self.__cdart_file = os.path.join(path, constants.ART_FILENAME_ALBUM_CDART)
+
+    def to_json(self):
+        return {self.path: {'has_cover': self.has_cover, 'has_cdart': self.has_cdart}}
+
+    @property
+    def path(self):
+        return self.__path
+
+    @property
+    def cover_file_path(self):
+        return self.__cover_file
+
+    @property
+    def cdart_file_path(self):
+        return self.__cdart_file
+
+    @property
+    def has_cover(self):
+        return xbmcvfs.exists(self.cover_file_path)
+
+    @property
+    def has_cdart(self):
+        return xbmcvfs.exists(self.cdart_file_path)

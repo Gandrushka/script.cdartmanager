@@ -477,7 +477,7 @@
 #                         local_album_count, local_artist_count, local_cdart_count = refresh_db(True)
 #                     elif not rebuild and not soft_exit:
 #                         try:
-#                             ui = GUI("script-cdartmanager.xml", __settings__.getPath(), "xxx_Default") # GUI("script-cdartmanager.xml", __addon__.getAddonInfo('path'), "xxx_Default")
+#                             ui = GUI("script-cdartmanager-ng.xml", __settings__.getPath(), "xxx_Default") # GUI("script-cdartmanager-ng.xml", __addon__.getAddonInfo('path'), "xxx_Default")
 #                             xbmc.sleep(2000)
 #                             ui.doModal()
 #                             del ui

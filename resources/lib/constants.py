@@ -1,6 +1,6 @@
 import xbmc
 
-ADDON_ID = "script.cdartmanager-ng"
+ADDON_ID = "script.cdartmanager-dev"
 ADDON_BRANCH = "NG"
 
 ADDON_FILENAME_SETTINGS = "settings.xml"
@@ -56,3 +56,5 @@ APPLE_DEFAULT_PARAMS = {"media": "music", "limit": 1}
 COLORS = {"white": "FFFFFFFF", "blue": "FF0000FF", "cyan": "FF00FFFF", "violet": "FFEE82EE", "pink": "FFFF1493",
           "red": "FFFF0000", "green": "FF00FF00", "yellow": "FFFFFF00", "orange": "FFFF4500"}
 
+ART_FILENAME_ALBUM_COVER = "folder.jpg"
+ART_FILENAME_ALBUM_CDART = "cdart.png"

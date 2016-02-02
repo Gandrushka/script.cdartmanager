@@ -13,7 +13,6 @@
             dark white  ecf0f1
     -->
 
-
     <controls>
 
         <control type="group" id="9000"> <!-- Main -->
@@ -317,7 +316,7 @@
                             <posy>35</posy>
                             <align>center</align>
                             <font>font13</font>
-                            <label>$ADDON[script.cdartmanager-ng 32520]</label><!-- Identified -->
+                            <label>$ADDON[script.cdartmanager-dev 32520]</label><!-- Identified -->
                             <textcolor>ff95a5a6</textcolor>
                         </control>
                     </control>
@@ -419,7 +418,7 @@
                             <posy>35</posy>
                             <align>center</align>
                             <font>font13</font>
-                            <label>$ADDON[script.cdartmanager-ng 32520]</label><!-- Identified -->
+                            <label>$ADDON[script.cdartmanager-dev 32520]</label><!-- Identified -->
                             <textcolor>ff95a5a6</textcolor>
                         </control>
                     </control>
@@ -466,7 +465,7 @@
                             <height>50</height>
                             <aligny>center</aligny>
                             <font>font13</font>
-                            <label>$ADDON[script.cdartmanager-ng 32510]</label><!-- Activity -->
+                            <label>$ADDON[script.cdartmanager-dev 32510]</label><!-- Activity -->
                             <textcolor>ff95a5a6</textcolor>
                         </control>
 

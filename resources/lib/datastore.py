@@ -218,10 +218,17 @@ class Datastore:
                 data_list.append({"k": k, "v": v})
         try:
             f = xbmcvfs.File(file_name, 'w')
-            json.dump(data_list, f, indent=2)
+            json.dump(data_list, f, indent=2, default=Datastore.to_json)
             f.close()
             result = True
         except IOError:
             pass
 
         return result
+
+    @staticmethod
+    def to_json(obj):
+        try:
+            return obj.to_json()
+        except:
+            return obj.__dict__

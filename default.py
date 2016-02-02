@@ -1,5 +1,4 @@
 import xbmc
-import xbmcgui
 
 import resources.lib.gui as gui
 import resources.lib.constants as constants
@@ -27,10 +26,10 @@ if __name__ == "__main__":
         __settings__.reload(True)
         __settings__.to_log()
 
-        ui = gui.GUI("script-cdartmanager.xml", __settings__.getPath(), constants.SKIN_FOLDER)
+        ui = gui.GUI("script-cdartmanager-ng.xml", __settings__.getPath(), constants.SKIN_FOLDER, '1080i')
         xbmc.sleep(500)
         ui.doModal()
-        settings.log("Closed, @TODO: save missing.txt if selected")
+        settings.log("Closed, @TODO: create and save missing.txt if selected")
         del ui
 
     except SystemExit as e:

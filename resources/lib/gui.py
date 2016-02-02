@@ -56,6 +56,7 @@ class GUI(xbmcgui.WindowXMLDialog):
             self.getControl(9311).setVisible(False)
             self.getControl(9321).setVisible(False)
             self.__datastore.update_datastore("all", self.dashboardCallback)
+            self.updateMainSelection()
             self.getControl(CONTROLID_TOP_LOADING).setVisible(False)
 
     def onControl(self, control_id):
@@ -105,13 +106,12 @@ class GUI(xbmcgui.WindowXMLDialog):
         if selected == self.DASHBOARD.getLabel2():
             if self.__datastore is None or force:
                 self.__datastore = datastore.Datastore(self.dashboardCallback)
-                percent = (100 * (self.__datastore.albums_count() - self.__datastore.albums_count_no_mbid()) / self.__datastore.albums_count())
-                settings.log("P: %s %s" % (self.__datastore.albums_count(), self.__datastore.albums_count_no_mbid()))
-                self.getControl(9311).setLabel("%s%%" % percent)
-                self.getControl(9311).setVisible(True)
-                percent = (100 * (self.__datastore.artists_count() - self.__datastore.artists_count_no_mbid()) / self.__datastore.artists_count())
-                self.getControl(9321).setLabel("%s%%" % percent)
-                self.getControl(9321).setVisible(True)
+            percent = (100 * (self.__datastore.albums_count() - self.__datastore.albums_count_no_mbid()) / self.__datastore.albums_count())
+            self.getControl(9311).setLabel("%s%%" % percent)
+            self.getControl(9311).setVisible(True)
+            percent = (100 * (self.__datastore.artists_count() - self.__datastore.artists_count_no_mbid()) / self.__datastore.artists_count())
+            self.getControl(9321).setLabel("%s%%" % percent)
+            self.getControl(9321).setVisible(True)
 
         self.getControl(CONTROLID_TOP_LOADING).setVisible(False)
 
