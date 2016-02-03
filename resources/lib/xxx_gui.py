@@ -50,26 +50,6 @@ class GUI(xbmcgui.WindowXMLDialog):
         progress = utils.ProgressDialog()
         self.__datastore = datastore.Datastore(progress.artist_album)
         progress.close()
-
-        #  @TODO: translate...
-        # albums first, it prefills some artists
-        albums_no_mbid = self.__datastore.albums_count_no_mbid()
-        if albums_no_mbid > 0 and utils.yesno_dialog("Match albums - powered by TheAudioDB and Musicbrainz",
-                                                     "%s of your %s albums do not have a MBID assigned." % (albums_no_mbid, self.__datastore.albums_count()),
-                                                     "Should we match them online now?"):
-            progress = utils.ProgressDialog()
-            self.__datastore.update_datastore("albums", progress.artist_album)
-            progress.close()
-
-        #  @TODO: translate...
-        artists_no_mbid = self.__datastore.artists_count_no_mbid()
-        if artists_no_mbid > 0 and utils.yesno_dialog("Match artists - powered by TheAudioDB and Musicbrainz",
-                                                      "%s of your %s artists do not have a MBID assigned." % (artists_no_mbid, self.__datastore.artists_count()),
-                                                      "Should we match these artists online now?"):
-            progress = utils.ProgressDialog()
-            self.__datastore.update_datastore("artists", progress.artist_album)
-            progress.close()
-
         # self.setup_all()
 
     # sets the colours for the lists

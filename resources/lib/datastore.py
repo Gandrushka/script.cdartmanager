@@ -29,6 +29,7 @@ class Datastore:
 
     def update_datastore(self, retrieve_missing=None, callback=None):
 
+        dev_mode = __settings__.isDevMode()
         canceled = False
 
         if self.__artists is None:
@@ -40,11 +41,11 @@ class Datastore:
         self.__addon_artists = self.load_addon_dict(constants.DS_ARTISTS_FILE)
 
         # on first run we migrate data from the legacy db...
-        if self.artists_count() == 0 and self.albums_count() == 0:
+        if self.addon_artists_count == 0 and self.addon_albums_count == 0:
             self.__legacy_db = migrate.LegacyDB()
 
-        check_albums_online = retrieve_missing in ("albums", "all")
-        albums_len = self.albums_count()
+        check_albums_online = retrieve_missing in ("albums", "all") and not canceled
+        albums_len = self.albums_count
         index = 0
         for albumid, album in self.__albums.iteritems():
             if 'albumid' in album:
@@ -53,15 +54,14 @@ class Datastore:
 
                 if callback is not None:
                     canceled = callback(index, albums_len, album['artist'][0], album['title'])
-                    if canceled:
-                        break
+                    check_albums_online = check_albums_online and not canceled
 
                 self._complement_album(album, self.__addon_albums[album['albumid']], check_albums_online)
 
             index += 1
 
-        check_artists_online = retrieve_missing in ("artists", "all")
-        artists_len = self.artists_count()
+        check_artists_online = retrieve_missing in ("artists", "all") and not canceled
+        artists_len = self.artists_count
         index = 0
         for artistid, artist in self.__artists.iteritems():
 
@@ -71,15 +71,14 @@ class Datastore:
 
                 if callback is not None:
                     canceled = callback(index, artists_len, artist['artist'])
-                    if canceled:
-                        break
+                    check_artists_online = check_artists_online and not canceled
 
                 self._complement_artist(artist, self.__addon_artists[artist['artistid']], check_artists_online)
 
             index += 1
 
-        if canceled:
-            pass
+#        if canceled:
+#            pass
 
         self.save_addon_dict(constants.DS_ALBUMS_FILE, self.__addon_albums)
         self.save_addon_dict(constants.DS_ARTISTS_FILE, self.__addon_artists)
@@ -156,7 +155,7 @@ class Datastore:
                     artist_mbid = utils.extract_mbid(mbid_result.artist)
                     if artist_mbid is not None and artist_id is not None and artist_id in self.__addon_artists:
                         addon_artist = self.__addon_artists[artist_id]
-                        if utils.extract_mbid(addon_artist, 'musicbrainzartistid') is None:
+                        if utils.extract_mbid(addon_artist, 'mbid') is None:
                             settings.log("Collateral artist update: %s (%s) / %s" % (artist, artist_id, artist_mbid))
                             addon_artist['mbid'] = artist_mbid
                             addon_artist['mbid_source'] = "%s (collateral)" % mbid_result.source
@@ -168,21 +167,33 @@ class Datastore:
 
         return result  # True if updated online
 
+    @property
+    def addon_artists_count(self):
+        return len(self.__addon_artists)
+
+    @property
     def artists_count(self):
         return len(self.__artists)
 
-    def artists_count_no_mbid(self):
+    @property
+    def artists_count_mbid(self):
         if self.__artists is not None:
-            return len([item for item in self.__artists.itervalues() if not utils.is_mbid(item["musicbrainzartistid"])])
+            return len([item for item in self.__artists.itervalues() if utils.is_mbid(item["musicbrainzartistid"])])
         else:
             return 0
 
+    @property
+    def addon_albums_count(self):
+        return len(self.__addon_albums)
+
+    @property
     def albums_count(self):
         return len(self.__albums)
 
-    def albums_count_no_mbid(self):
+    @property
+    def albums_count_mbid(self):
         if self.__albums is not None:
-            return len([item for item in self.__albums.itervalues() if not utils.is_mbid(item["musicbrainzalbumid"])])
+            return len([item for item in self.__albums.itervalues() if utils.is_mbid(item["musicbrainzalbumid"])])
         else:
             return 0
 
@@ -206,29 +217,26 @@ class Datastore:
         result = False
         file_name = __settings__.getDataStoreFile(ds_file_name)
 
+        volatile_content = ['paths']
+        dev_content = ['artist', 'title']
+
         dev_mode = __settings__.isDevMode()
-        dev_content = ['paths', 'artist', 'title']
 
         data_list = []
         if data is not None:
             for k, v in data.items():
+                for r in volatile_content:
+                    v.pop(r, None)
                 if not dev_mode:
                     for r in dev_content:
                         v.pop(r, None)
                 data_list.append({"k": k, "v": v})
         try:
             f = xbmcvfs.File(file_name, 'w')
-            json.dump(data_list, f, indent=2, default=Datastore.to_json)
+            json.dump(data_list, f, indent=2)
             f.close()
             result = True
         except IOError:
             pass
 
         return result
-
-    @staticmethod
-    def to_json(obj):
-        try:
-            return obj.to_json()
-        except:
-            return obj.__dict__
