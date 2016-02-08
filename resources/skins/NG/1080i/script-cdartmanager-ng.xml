@@ -281,7 +281,7 @@
                     </control>
 
                     <control type="group">
-                        <control type="label" id="9310">
+                        <control type="label" id="9110">
                             <!-- Albumcount -->
                             <width>250</width>
                             <posy>5</posy>
@@ -302,7 +302,7 @@
 
                     <control type="group">
                         <left>270</left>
-                        <control type="label" id="9311">
+                        <control type="label" id="9111">
                             <!-- Identified Albumcount -->
                             <width>200</width>
                             <posy>5</posy>
@@ -311,7 +311,7 @@
                             <label>$NUMBER[0]</label>
                             <textcolor>ff95a5a6</textcolor>
                         </control>
-                        <control type="label" id="9312">
+                        <control type="label" id="9112">
                             <width>200</width>
                             <posy>35</posy>
                             <align>center</align>
@@ -382,7 +382,7 @@
                     </control>
 
                     <control type="group">
-                        <control type="label" id="9320">
+                        <control type="label" id="9120">
                             <!-- Artistscount -->
                             <width>250</width>
                             <posy>5</posy>
@@ -404,7 +404,7 @@
 
                     <control type="group">
                         <left>270</left>
-                        <control type="label" id="9321">
+                        <control type="label" id="9121">
                             <!-- Identified Artistcount -->
                             <width>200</width>
                             <posy>5</posy>
@@ -413,7 +413,7 @@
                             <label>$NUMBER[0]</label>
                             <textcolor>ff95a5a6</textcolor>
                         </control>
-                        <control type="label" id="9322">
+                        <control type="label" id="9122">
                             <width>200</width>
                             <posy>35</posy>
                             <align>center</align>
@@ -495,24 +495,7 @@
                         <onright>9202</onright>
                         <ondown>9011</ondown>
                         <onup>9011</onup>
-                        <width>200</width>
-                        <height>50</height>
-                        <texturefocus colordiffuse="ff2ecd71">solid_white.png</texturefocus>
-                        <texturenofocus colordiffuse="ff26ad5e">solid_white.png</texturenofocus>
-                        <label>Hello World</label>
-                        <align>center</align>
-                        <font>font13</font>
-                        <textcolor>FFFFFFFF</textcolor>
-                        <focusedcolor>FFFFFFFF</focusedcolor>
-                        <disabledcolor>80FFFFFF</disabledcolor>
-                        <invalidcolor>FFFFFFFF</invalidcolor>
-                    </control>
-                    <control type="button" id="9202">
-                        <left>220</left>
-                        <onleft>9201</onleft>
-                        <ondown>9011</ondown>
-                        <onup>9011</onup>
-                        <width>200</width>
+                        <width>250</width>
                         <height>50</height>
                         <texturefocus colordiffuse="ff2ecd71">solid_white.png</texturefocus>
                         <texturenofocus colordiffuse="ff26ad5e">solid_white.png</texturenofocus>
@@ -541,13 +524,6 @@
                         <control type="image">
                             <texture>solid_white.png</texture>
                         </control>
-                        <!--
-                        <control type="image">
-                            <top>50</top>
-                            <height>1</height>
-                            <texture colordiffuse="ffd0d5d5">solid_white.png</texture>
-                        </control>
-                        -->
                         <control type="image">
                             <height>1</height>
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
@@ -566,18 +542,55 @@
                             <height>1</height>
                             <texture colordiffuse="ff95a5a6">solid_white.png</texture>
                         </control>
+                    </control>
 
-                        <!--
-                        <control type="label">
-                            <posx>20</posx>
-                            <height>50</height>
-                            <aligny>center</aligny>
-                            <font>font13</font>
-                            <label>$ADDON[script.cdartmanager-dev 32510]</label>
-                            <textcolor>ff95a5a6</textcolor>
-                        </control>
-                        -->
-
+                    <control type="list" id="9210">
+                        <itemlayout height="100">
+                            <control type="image">
+                                <top>20</top>
+                                <left>20</left>
+                                <width>50</width>
+                                <height>50</height>
+                                <info>Listitem.ActualIcon</info>
+                                <colordiffuse>ff95a5a6</colordiffuse>
+                            </control>
+                            <control type="label">
+                                <top>25</top>
+                                <left>90</left>
+                                <width>240</width>
+                                <height>100</height>
+                                <font>font13</font>
+                                <align>left</align>
+                                <info>ListItem.Label</info>
+                                <textcolor>ff95a5a6</textcolor>
+                            </control>
+                        </itemlayout>
+                        <focusedlayout height="100">
+                            <control type="image">
+                                <top>10</top>
+                                <width>350</width>
+                                <height>70</height>
+                                <texture colordiffuse="ee233444">solid_white.png</texture>
+                            </control>
+                            <control type="image">
+                                <top>20</top>
+                                <left>20</left>
+                                <width>50</width>
+                                <height>50</height>
+                                <info>Listitem.ActualIcon</info>
+                                <colordiffuse>ff26ad5e</colordiffuse>
+                            </control>
+                            <control type="label">
+                                <top>25</top>
+                                <left>90</left>
+                                <height>100</height>
+                                <width>240</width>
+                                <font>font13</font>
+                                <align>left</align>
+                                <info>ListItem.Label</info>
+                                <textcolor>ffffffff</textcolor>
+                            </control>
+                        </focusedlayout>
                     </control>
                 </control>
 

@@ -52,11 +52,10 @@ class Datastore:
                 if album['albumid'] not in self.__addon_albums:
                     self.__addon_albums[album['albumid']] = {}
 
+                callback_album = self._complement_album(album, self.__addon_albums[album['albumid']], check_albums_online)
                 if callback is not None:
-                    canceled = callback(index, albums_len, album['artist'][0], album['title'])
+                    canceled = callback(index, albums_len, callback_album)
                     check_albums_online = check_albums_online and not canceled
-
-                self._complement_album(album, self.__addon_albums[album['albumid']], check_albums_online)
 
             index += 1
 
@@ -69,11 +68,10 @@ class Datastore:
                 if artist['artistid'] not in self.__addon_artists:
                     self.__addon_artists[artist['artistid']] = {}
 
+                callback_artist = self._complement_artist(artist, self.__addon_artists[artist['artistid']], check_artists_online)
                 if callback is not None:
-                    canceled = callback(index, artists_len, artist['artist'])
+                    canceled = callback(index, artists_len, callback_artist)
                     check_artists_online = check_artists_online and not canceled
-
-                self._complement_artist(artist, self.__addon_artists[artist['artistid']], check_artists_online)
 
             index += 1
 
@@ -93,7 +91,7 @@ class Datastore:
         # settings.log("Albums w/o mbid: %s" % self.get_album_count_no_mbid())
 
     def _complement_artist(self, kodi_entry, addon_entry, online=False):
-        result = False
+        cdart_manager_status = None
         if kodi_entry is not None and 'artist' in kodi_entry:
             artist = kodi_entry['artist']
             addon_entry['artist'] = artist
@@ -103,27 +101,30 @@ class Datastore:
                 if legacy_mbid is not None:
                     addon_entry['mbid'] = legacy_mbid
                     addon_entry['mbid_source'] = self.SOURCE_LEGACY
-
+                    cdart_manager_status = "known"
             mbid = utils.extract_mbid(addon_entry, 'mbid')
             if mbid is None:
                 mbid = utils.extract_mbid(kodi_entry, 'musicbrainzartistid')
                 if mbid is not None:
                     addon_entry['mbid_source'] = self.SOURCE_KODI
+                    cdart_manager_status = "known"
             if mbid is None and online:
                 mbid_result = mbid_finder.MBIDFinder(artist).find()
                 mbid = utils.extract_mbid(mbid_result.artist)
                 if mbid is not None:
                     addon_entry['mbid_source'] = mbid_result.source
-                    result = True
+                    cdart_manager_status = "new"
+
             addon_entry['mbid'] = mbid
 
             if mbid is not None:
                 kodi_entry['musicbrainzartistid'] = mbid
+                kodi_entry['cdart_artist'] = cdart_manager_status
 
-        return result  # True if updated online
+        return kodi_entry
 
     def _complement_album(self, kodi_entry, addon_entry, online=False):
-        result = False
+        cdart_manager_status = None
         if kodi_entry is not None and 'title' in kodi_entry:
             artist = kodi_entry['artist'][0]
             album = kodi_entry['title']
@@ -138,18 +139,20 @@ class Datastore:
                 if legacy_mbid is not None:
                     addon_entry['mbid'] = legacy_mbid
                     addon_entry['mbid_source'] = self.SOURCE_LEGACY
+                    cdart_manager_status = "known"
 
             mbid = utils.extract_mbid(addon_entry, 'mbid')
             if mbid is None:
                 mbid = utils.extract_mbid(kodi_entry, 'musicbrainzalbumid')
                 if mbid is not None:
                     addon_entry['mbid_source'] = self.SOURCE_KODI
+                    cdart_manager_status = "known"
             if mbid is None and online:
                 mbid_result = mbid_finder.MBIDFinder(artist, album).find()
                 mbid = utils.extract_mbid(mbid_result.album)
                 if mbid is not None:
                     addon_entry['mbid_source'] = mbid_result.source
-                    result = True
+                    cdart_manager_status = "new"
                     # if we have a new album hit we also update the artist
                     artist_id = kodi_entry['artistid'][0]
                     artist_mbid = utils.extract_mbid(mbid_result.artist)
@@ -164,8 +167,9 @@ class Datastore:
 
             if mbid is not None:
                 kodi_entry['musicbrainzalbumid'] = mbid
+                kodi_entry['cdart_album'] = cdart_manager_status
 
-        return result  # True if updated online
+        return kodi_entry
 
     @property
     def addon_artists_count(self):

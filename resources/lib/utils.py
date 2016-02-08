@@ -1,19 +1,13 @@
 import xbmc
 import xbmcgui
 import settings
+import utils_lang
 
 __settings__ = settings.Settings()
 
 
-def lang(id_, addon=True):
-    if addon:
-        return __settings__.getAddon().getLocalizedString(id_)
-    else:
-        return xbmc.getLocalizedString(id_)
-
-
 def yesno_dialog(heading, line1='', line2='', line3='',):
-    return xbmcgui.Dialog().yesno(heading, line1, line2, line3, lang(32179), lang(32178))
+    return xbmcgui.Dialog().yesno(heading, line1, line2, line3, utils_lang.lng(32179), utils_lang.lng(32178))
 
 
 class ProgressDialog:
@@ -28,11 +22,11 @@ class ProgressDialog:
             percent = int((position / float(size)) * 100)
             if not self.__dialog:
                 self.__dialog = xbmcgui.DialogProgress()
-                self.__dialog.create(heading=lang(32134), line1="", line2="", line3="")
+                self.__dialog.create(heading=utils_lang.lng(32134), line1="", line2="", line3="")
             if album is None:
-                self.__dialog.update(percent=percent, line1="%s:" % lang(32137), line2=smart_unicode(artist), line3="")
+                self.__dialog.update(percent=percent, line1="%s:" % utils_lang.lng(32137), line2=smart_unicode(artist), line3="")
             else:
-                self.__dialog.update(percent=percent, line1="%s:" % lang(32138), line2="%s - %s" % (smart_unicode(artist), smart_unicode(album)))
+                self.__dialog.update(percent=percent, line1="%s:" % utils_lang.lng(32138), line2="%s - %s" % (smart_unicode(artist), smart_unicode(album)))
             # xbmc.sleep(500)
             return self.__dialog.iscanceled()
 
