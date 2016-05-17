@@ -27,10 +27,10 @@
 
             <control type="group"> <!-- Wrapper -->
 
-                <left>40</left>
-                <right>40</right>
-                <top>40</top>
-                <bottom>40</bottom>
+                <left>0</left>
+                <right>0</right>
+                <top>0</top>
+                <bottom>0</bottom>
 
                 <control type="group" id="9010"> <!-- Left -->
                     <width>350</width>
@@ -48,12 +48,13 @@
                             <texture>icon.jpg</texture>
                         </control>
                         <control type="label">
-                            <top>30</top>
-                            <left>110</left>
-                            <width>240</width>
+                            <top>35</top>
+                            <left>120</left>
+                            <width>230</width>
                             <height>100</height>
                             <font>font13</font>
                             <align>left</align>
+                            <aligny>top</aligny>
                             <label>cdART Manager</label>
                             <textcolor>ffffffff</textcolor>
                         </control>
@@ -79,12 +80,13 @@
                                     <colordiffuse>ff95a5a6</colordiffuse>
                                 </control>
                                 <control type="label">
-                                    <top>25</top>
+                                    <top>30</top>
                                     <left>90</left>
                                     <width>240</width>
                                     <height>100</height>
                                     <font>font13</font>
                                     <align>left</align>
+                                    <aligny>top</aligny>
                                     <info>ListItem.Label</info>
                                     <textcolor>ff95a5a6</textcolor>
                                 </control>
@@ -105,12 +107,13 @@
                                     <colordiffuse>ff26ad5e</colordiffuse>
                                 </control>
                                 <control type="label">
-                                    <top>25</top>
+                                    <top>30</top>
                                     <left>90</left>
                                     <height>100</height>
                                     <width>240</width>
                                     <font>font13</font>
                                     <align>left</align>
+                                    <aligny>top</aligny>
                                     <info>ListItem.Label</info>
                                     <textcolor>ffffffff</textcolor>
                                 </control>
@@ -158,8 +161,10 @@
 
                         <!-- Header -->
                         <control type="label" id="9021">
+                            <height>100</height>
+                            <top>35</top>
                             <font>font13</font>
-                            <aligny>center</aligny>
+                            <aligny>top</aligny>
                             <align>center</align>
                             <label>Welcome</label>
                             <textcolor>ff26ad5e</textcolor>
@@ -177,8 +182,6 @@
                             </control>
                         </control>
 
-
-
                     </control>
                 </control>
 
@@ -190,7 +193,7 @@
         <control type="group" id="9100">
             <visible>StringCompare(Container(9011).ListItem(0).Label2, "DASHBOARD")</visible>
             <left>400</left>
-            <top>150</top>
+            <top>110</top>
             <right>50</right>
             <bottom>50</bottom>
 
